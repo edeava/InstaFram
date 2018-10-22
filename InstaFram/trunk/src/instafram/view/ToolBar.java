@@ -37,7 +37,7 @@ public class ToolBar extends JToolBar{
 		
 		JButton btnSaveAs = new JButton();
 		btnSaveAs.setToolTipText("Save");
-		btnSaveAs.setIcon(new ImageIcon("Img/save.png"));
+		btnSaveAs.setIcon(new ImageIcon("Img/saveAs.png"));
 		add(btnSaveAs);
 		
 		JButton btnExit = new JButton();
