@@ -31,6 +31,9 @@ public class Application extends JFrame{
 		ToolBar toolBar = new ToolBar();
 		add(toolBar, BorderLayout.NORTH);
 		
+		InstaPanel panel = new InstaPanel(scrSize);
+		add(panel, BorderLayout.CENTER);
+		
 	}
 
 	public static void main(String[] args) {
