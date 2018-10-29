@@ -11,12 +11,17 @@ import java.awt.image.ImageProducer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JSplitPane;
 import javax.swing.border.Border;
 
 public class Application extends JFrame{
 
+	private static Application instance;
 	
-	public Application() throws HeadlessException {
+	private Application(){
+		super();
+		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension scrSize = kit.getScreenSize();
 		setSize(scrSize.width / 2, scrSize.height / 2);
@@ -31,15 +36,20 @@ public class Application extends JFrame{
 		ToolBar toolBar = new ToolBar();
 		add(toolBar, BorderLayout.NORTH);
 		
-		InstaPanel panel = new InstaPanel(scrSize);
-		add(panel, BorderLayout.CENTER);
+		InstaPanel panel = new InstaPanel(JSplitPane.VERTICAL_SPLIT, new PanelDG(), new PanelDD());
+		panel.setResizeWeight(0);
+		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new PanelL(), panel);
+		split.setResizeWeight(1);
+		add(split, BorderLayout.CENTER);
 		
+		JLabel lb = new JLabel("Status bar");
+		add(lb, BorderLayout.SOUTH);
 	}
 
-	public static void main(String[] args) {
-		Application app = new Application();
-		app.setVisible(true);
-
+	public static Application getInstance() {
+		if(instance == null)
+			return new Application();
+		return instance;
 	}
 
 }
