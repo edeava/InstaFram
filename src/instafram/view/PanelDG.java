@@ -12,10 +12,6 @@ public class PanelDG extends APanel{
 	
 	public PanelDG() {
 		
-		this.setBorder(new EmptyBorder(0, 0, 0, 0));
-		ToolBar tb = new ToolBar();
-		add(tb, BorderLayout.NORTH);
-		
 		//privremeno
 		JTextArea ta = new JTextArea("Test za scrollPane", 10, 20);
 		
