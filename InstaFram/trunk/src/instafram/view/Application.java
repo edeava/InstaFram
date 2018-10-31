@@ -13,7 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 public class Application extends JFrame{
@@ -36,15 +38,10 @@ public class Application extends JFrame{
 		
 		ToolBar toolBar = new ToolBar();
 		add(toolBar, BorderLayout.NORTH);
+		
 		ToolBar tb = new ToolBar();
-		//add(tb, BorderLayout.NORTH);
-		
-		InstaPanel panel = new InstaPanel(JSplitPane.VERTICAL_SPLIT, new PanelDG(), new PanelDD());
-		panel.setResizeWeight(0);
-		
-		JPanel workspace = new JPanel(new BorderLayout());
+		PanelD workspace = new PanelD(new BorderLayout());
 		workspace.add(tb, BorderLayout.NORTH);
-		workspace.add(panel);
 		
 		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new PanelL(), workspace);
 		split.setResizeWeight(1);
