@@ -30,6 +30,8 @@ public class ToolBar extends JToolBar{
 		btnSwitch.setIcon(new ImageIcon("Img/switch.png"));
 		add(btnSwitch);
 		
+		addSeparator();
+		
 		JButton btnSave = new JButton();
 		btnSave.setToolTipText("Save");
 		btnSave.setIcon(new ImageIcon("Img/save.png"));
@@ -39,6 +41,8 @@ public class ToolBar extends JToolBar{
 		btnSaveAs.setToolTipText("SaveAs");
 		btnSaveAs.setIcon(new ImageIcon("Img/saveAs.png"));
 		add(btnSaveAs);
+		
+		addSeparator();
 		
 		JButton btnExit = new JButton();
 		btnExit.setToolTipText("Exit");

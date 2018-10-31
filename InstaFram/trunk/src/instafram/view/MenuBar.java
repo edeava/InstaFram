@@ -57,17 +57,7 @@ public class MenuBar extends JMenuBar{
 		mExport.add(mExpToMsWord);
 		mExport.setIcon(new ImageIcon("Img/export.png"));
 		
-		JMenu mImport = new JMenu("mImport");
-		JMenuItem mImpToPdf = new JMenuItem("mImpToPdf");
-		mImpToPdf.setIcon(new ImageIcon("Img/pdf.png"));
-		JMenuItem mImpToMsExcell = new JMenuItem("mImpToMsExcell");
-		mImpToMsExcell.setIcon(new ImageIcon("Img/excell.png"));
-		JMenuItem mImpToMsWord = new JMenuItem("mImpToMsWord");
-		mImpToMsWord.setIcon(new ImageIcon("Img/word.png"));
-		
-		mImport.add(mImpToPdf);
-		mImport.add(mImpToMsExcell);
-		mImport.add(mImpToMsWord);
+		JMenuItem mImport = new JMenuItem("mImport");
 		mImport.setIcon(new ImageIcon("Img/import.png"));
 		
 		JMenuItem mExit = new JMenuItem("mExit");
