@@ -9,14 +9,6 @@ public class ZTreeNode extends DefaultMutableTreeNode{
 		super();
 		this.node = node;
 	}
-
-	public static ZTreeNode createTree(IZTreeNode node) {
-		ZTreeNode root = new ZTreeNode(node);
-		
-		for(IZTreeNode child : node.getChildren())
-			root.add(ZTreeNode.createTree(child));
-		return root;
-	}
 	
 	public IZTreeNode getNode() {
 		return node;

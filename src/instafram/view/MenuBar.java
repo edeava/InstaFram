@@ -12,9 +12,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import instafram.tree.view.ZTree;
+
 public class MenuBar extends JMenuBar{
 
-	public MenuBar() {
+	public MenuBar(ZTree tree) {
 		super();
 
 		JMenu file = new JMenu("File");
@@ -58,6 +60,7 @@ public class MenuBar extends JMenuBar{
 		mExport.setIcon(new ImageIcon("Img/export.png"));
 		
 		JMenuItem mImport = new JMenuItem("mImport");
+		mImport.addActionListener(tree.getActionManager().getLoadAction());
 		mImport.setIcon(new ImageIcon("Img/import.png"));
 		
 		JMenuItem mExit = new JMenuItem("mExit");

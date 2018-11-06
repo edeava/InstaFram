@@ -48,7 +48,7 @@ public class Application extends JFrame{
 		
 		tree = new ZTree(new ZTreeNode(new Kompanija("Kompanije")), new ZTreeController());
 		
-		MenuBar menu = new MenuBar();
+		MenuBar menu = new MenuBar(tree);
 		this.setJMenuBar(menu);
 		
 		ToolBar toolBar = new ToolBar(tree);
