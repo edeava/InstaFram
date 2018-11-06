@@ -1,7 +1,10 @@
 package instafram.tree.controller;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream.PutField;
@@ -62,7 +65,7 @@ public class ZTreeController implements IZTreeController{
 
 	public static void dfs(ZTreeNode root, BufferedWriter out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
 		visited.add(root);
-		out.write(root.getNode().getName());
+		out.write(root.getNode().getName() + " ");
 		
 		while(e.hasMoreElements()) {
 			ZTreeNode next = (ZTreeNode) e.nextElement();
@@ -73,9 +76,35 @@ public class ZTreeController implements IZTreeController{
 	}
 	
 	@Override
-	public void loadTree() {
-		// TODO Auto-generated method stub
-		
+	public void loadTree(ZTreeNode root, File file) {
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(file));
+			int flag = in.read();
+			char c = (char) flag;
+			String komp = "";
+			
+			while(flag != -1) {
+				if(c == ' ') {
+					addNode(root, new Kompanija(komp));
+					komp = "";
+					root = (ZTreeNode) root.getFirstChild();
+				}else if(c == ')') {
+					root = (ZTreeNode) root.getParent();
+				}else {
+					komp += c;
+				}
+				
+				flag = in.read();
+				c = (char) flag;
+			}
+			
+			
+			in.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

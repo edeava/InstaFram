@@ -13,6 +13,6 @@ public interface IZTreeController {
 	public void editNode(ZTreeNode node);
 	public void removeNode(ZTreeNode node);
 	public void saveTree(ZTreeNode root, File file);
-	public void loadTree();
+	public void loadTree(ZTreeNode root, File file);
 }
 	
