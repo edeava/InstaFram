@@ -16,12 +16,25 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.JTree;
 import javax.swing.border.Border;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import instafram.tree.actions.ZTreeActionManager;
+import instafram.tree.controller.ZTreeController;
+import instafram.tree.model.ZTreeNode;
+import instafram.tree.view.ZTree;
+import instafram.treeComponent.model.Kompanija;
 
 public class Application extends JFrame{
 
 	private static Application instance;
+	private ZTree tree;
 	
+	public ZTree getTree() {
+		return tree;
+	}
+
 	private Application(){
 		super();
 		
@@ -33,22 +46,27 @@ public class Application extends JFrame{
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		
+		tree = new ZTree(new ZTreeNode(new Kompanija("Kompanije")), new ZTreeController());
+		
 		MenuBar menu = new MenuBar();
 		this.setJMenuBar(menu);
 		
-		ToolBar toolBar = new ToolBar();
+		ToolBar toolBar = new ToolBar(tree);
 		add(toolBar, BorderLayout.NORTH);
 		
-		ToolBar tb = new ToolBar();
+		ToolBar tb = new ToolBar(tree);
 		PanelD workspace = new PanelD(new BorderLayout());
 		workspace.add(tb, BorderLayout.NORTH);
 		
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new PanelL(), workspace);
-		split.setResizeWeight(1);
+		JScrollPane treeSc = new JScrollPane(tree);
+		
+		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeSc, workspace);
+		split.setResizeWeight(0.25);
 		add(split, BorderLayout.CENTER);
 		
 		JLabel lb = new JLabel("Status bar");
 		add(lb, BorderLayout.SOUTH);
+		
 	}
 
 	public static Application getInstance() {

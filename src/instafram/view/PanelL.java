@@ -4,11 +4,17 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
-public class PanelL extends JPanel{
+import instafram.tree.actions.ZTreeActionManager;
+import instafram.tree.controller.ZTreeController;
+import instafram.tree.model.ZTreeNode;
+import instafram.tree.view.ZTree;
+import instafram.treeComponent.model.Kompanija;
 
-	public PanelL() {
-		
-	}
+public class PanelL extends JScrollPane{
+
 
 }
