@@ -5,13 +5,16 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import instafram.tree.actions.AddNodeAction;
+import instafram.tree.view.ZTree;
+
 public class ToolBar extends JToolBar{
 
-	public ToolBar() {
+	public ToolBar(ZTree tree) {
 		super(SwingConstants.HORIZONTAL);
 		
 		JButton btnNew = new JButton();
-		btnNew.setToolTipText("New");
+		btnNew.addActionListener(tree.getActionManager().getAddNode());
 		btnNew.setIcon(new ImageIcon("Img/new.png"));
 		add(btnNew);
 		
@@ -22,6 +25,7 @@ public class ToolBar extends JToolBar{
 		
 		JButton btnClose = new JButton();
 		btnClose.setToolTipText("Close");
+		btnClose.addActionListener(tree.getActionManager().getRemoveNode());
 		btnClose.setIcon(new ImageIcon("Img/close.png"));
 		add(btnClose);
 		
@@ -34,6 +38,7 @@ public class ToolBar extends JToolBar{
 		
 		JButton btnSave = new JButton();
 		btnSave.setToolTipText("Save");
+		btnSave.addActionListener(tree.getActionManager().getSaveAction());
 		btnSave.setIcon(new ImageIcon("Img/save.png"));
 		add(btnSave);
 		
