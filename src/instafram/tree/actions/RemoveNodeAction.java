@@ -11,7 +11,7 @@ import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.view.Application;
 
-public class RemoveNodeAction extends ZTreeAbsAction implements Observer{
+public class RemoveNodeAction extends ZTreeAbsAction{
 
 	public RemoveNodeAction(IZTreeController controller) {
 		super(controller);
@@ -23,20 +23,5 @@ public class RemoveNodeAction extends ZTreeAbsAction implements Observer{
 			this.controller.removeNode(selectedNode);
 		else JOptionPane.showMessageDialog(Application.getInstance(), "Nevalidno brisanje");
 		
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSelectedNode(ZTreeNode selectedNode) {
-		this.selectedNode = selectedNode;
-		this.setEnabled(!this.selectedNode.isRoot());
-	}
-	
-	
-	
+	}	
 }

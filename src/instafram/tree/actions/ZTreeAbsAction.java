@@ -14,7 +14,10 @@ public abstract class ZTreeAbsAction extends AbstractAction{
 		this.setEnabled(false);
 	}
 
-	public abstract void setSelectedNode(ZTreeNode selectedNode);
+	public void setSelectedNode(ZTreeNode selectedNode){
+		this.selectedNode = selectedNode;
+		this.setEnabled(this.selectedNode.getAllowsChildren());
+	}
 	
 	
 }

@@ -35,4 +35,12 @@ public class ZTreeNode extends DefaultMutableTreeNode{
 	public boolean equals(Object arg0) {
 		return node.getName().equals(((ZTreeNode)arg0).getNode().getName());
 	}
+
+	@Override
+	public void setUserObject(Object arg0) {
+		if(arg0 instanceof String)
+			node.setName((String) arg0);
+	}
+	
+	
 }
