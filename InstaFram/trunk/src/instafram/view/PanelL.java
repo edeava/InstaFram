@@ -12,7 +12,7 @@ import instafram.tree.actions.ZTreeActionManager;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.tree.view.ZTree;
-import instafram.treeComponent.model.Kompanija;
+import instafram.treeComponent.model.Proizvod;
 
 public class PanelL extends JScrollPane{
 

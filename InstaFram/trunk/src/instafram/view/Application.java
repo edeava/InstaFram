@@ -6,12 +6,16 @@ import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -24,7 +28,7 @@ import instafram.tree.actions.ZTreeActionManager;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.tree.view.ZTree;
-import instafram.treeComponent.model.Kompanija;
+import instafram.treeComponent.model.Proizvod;
 
 public class Application extends JFrame{
 
@@ -46,7 +50,7 @@ public class Application extends JFrame{
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		
-		tree = new ZTree(new ZTreeNode(new Kompanija("Kompanije")), new ZTreeController());
+		tree = new ZTree(new ZTreeNode(new Proizvod("Proizvodi")), new ZTreeController());
 		
 		MenuBar menu = new MenuBar(tree);
 		this.setJMenuBar(menu);
@@ -73,6 +77,10 @@ public class Application extends JFrame{
 		if(instance == null)
 			return new Application();
 		return instance;
+	}
+	
+	public static int option(String message, String title) {
+		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 	}
 
 }

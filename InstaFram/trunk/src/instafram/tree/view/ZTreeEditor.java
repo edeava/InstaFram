@@ -12,7 +12,7 @@ import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 import instafram.tree.model.IZTreeNode;
-import instafram.treeComponent.model.Kompanija;
+import instafram.treeComponent.model.Proizvod;
 
 public class ZTreeEditor extends DefaultTreeCellEditor implements ActionListener{
 	

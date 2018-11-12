@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
-import instafram.treeComponent.model.Kompanija;
+import instafram.treeComponent.model.Proizvod;
 import instafram.view.Application;
 
 public class AddNodeAction extends ZTreeAbsAction{
@@ -21,8 +21,8 @@ public class AddNodeAction extends ZTreeAbsAction{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(selectedNode != null)
-			controller.addNode(selectedNode, new Kompanija("Kompanija" + AddNodeAction.i++));
-		else JOptionPane.showMessageDialog(Application.getInstance(), "Nevalidno dodavanje");
+		if(selectedNode == null)
+			selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
+			controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
 	}
 }
