@@ -50,7 +50,7 @@ public class Application extends JFrame{
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		
-		tree = new ZTree(new ZTreeNode(new Proizvod("Proizvodi")), new ZTreeController());
+		tree = new ZTree( new ZTreeController());
 		
 		MenuBar menu = new MenuBar(tree);
 		this.setJMenuBar(menu);
@@ -70,7 +70,6 @@ public class Application extends JFrame{
 		
 		JLabel lb = new JLabel("Status bar");
 		add(lb, BorderLayout.SOUTH);
-		
 	}
 
 	public static Application getInstance() {
