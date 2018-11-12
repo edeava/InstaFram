@@ -12,6 +12,7 @@ import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 import instafram.tree.model.IZTreeNode;
+import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
 
 public class ZTreeEditor extends DefaultTreeCellEditor implements ActionListener{
@@ -25,8 +26,8 @@ public class ZTreeEditor extends DefaultTreeCellEditor implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(node != null && node instanceof IZTreeNode) {
-			((IZTreeNode) node).setName(e.getActionCommand());
+		if(node != null) {
+			((ZTreeNode) node).getNode().setName(e.getActionCommand());
 			System.out.println("Akcija");
 		}
 	}
