@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import instafram.tree.model.IZTreeNode;
 
 public class Proizvod implements IZTreeNode{
-	private String name;
 
+	private String name;
+	
 	public Proizvod() {
-		name  = "Proizvod";
+		this.name = "Proizvod";
 	}
 
+	
 	public Proizvod(String name) {
 		this.name = name;
 	}
+
 
 	@Override
 	public void addNode(IZTreeNode node) {
@@ -36,17 +39,20 @@ public class Proizvod implements IZTreeNode{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name = name;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return name;
 	}
+	
+	
+
 }
