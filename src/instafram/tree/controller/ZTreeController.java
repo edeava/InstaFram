@@ -98,8 +98,6 @@ public class ZTreeController implements IZTreeController{
 	
 	@Override
 	public void loadTree(ZTreeNode root, File file) throws IOException, FileNotFoundException{
-		if(root == null)
-			root = (ZTreeNode) tree.getModel().getRoot();
 
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		int flag = in.read();
@@ -108,9 +106,16 @@ public class ZTreeController implements IZTreeController{
 			
 		while(flag != -1) {
 			if(c == ' ') {
-				addNode(root, new Proizvod(komp));
+				if(root == null) {
+					root = new ZTreeNode(new Proizvod(komp));
+					tree.setRoot(root);
+				}
+				else { 
+					addNode(root, (IZTreeNode) new Proizvod(komp));
+					root = (ZTreeNode) root.getFirstChild();
+				}
 				komp = "";
-				root = (ZTreeNode) root.getFirstChild();
+				
 			}else if(c == ')') {
 				root = (ZTreeNode) root.getParent();
 			}else {

@@ -1,5 +1,9 @@
 package main;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
+
 import instafram.view.Application;
 
 public class Main {
