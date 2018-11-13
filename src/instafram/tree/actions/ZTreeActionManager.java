@@ -6,6 +6,8 @@ import javax.swing.tree.TreePath;
 
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
+import instafram.treeComponent.model.Proizvod;
+import instafram.view.Application;
 
 public class ZTreeActionManager implements TreeSelectionListener{
 	private AddNodeAction addNode;
@@ -33,6 +35,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.editNode.setSelectedNode(selectedNode);
 			this.saveAction.setSelectedNode(selectedNode);
 			this.loadAction.setSelectedNode(selectedNode);
+			
+			selectedNode.pukni(Application.getInstance().getWorkspace().getObserver());
 		}
 	}
 
