@@ -87,7 +87,7 @@ public class ZTreeController implements IZTreeController{
 
 	public static void dfs(ZTreeNode root, BufferedWriter out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
 		visited.add(root);
-		out.write(root.getNode().getName() + " ");
+		out.write(root.getNode().getName() + "{" + root.getNode().getSadrzaj() + "}" + " ");
 		
 		while(e.hasMoreElements()) {
 			ZTreeNode next = (ZTreeNode) e.nextElement();
@@ -102,27 +102,36 @@ public class ZTreeController implements IZTreeController{
 
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		int flag = in.read();
-		boolean tick = true;
+		ArrayList<ZTreeNode> visited = new ArrayList<>();
+		boolean tick = false;
 		char c = (char) flag;
-		String komp = "";
+		String komp = "", sad = "";
 			
 		while(flag != -1) {
 			if(c == ' ') {
 				if(root == null) {
-					root = new ZTreeNode(new Proizvod(komp));
+					root = new ZTreeNode(new Proizvod(komp, sad));
 					tree.setRoot(root);
+					visited.add(root);
 				}
 				else { 
-					addNode(root, (IZTreeNode) new Proizvod(komp));
-					root = (ZTreeNode) root.getFirstChild();
+					addNode(root, (IZTreeNode) new Proizvod(komp, sad));
+					while(visited.contains(root))
+						root = (ZTreeNode) root.getNextNode();
+					visited.add(root);
 				}
 				komp = "";
+				sad = "";
 				
 			}else if(c == ')') {
 				root = (ZTreeNode) root.getParent();
-			}else {
+			}else if(c == '{') {
+				tick = true;
+			}else if(c == '}'){
+				tick = false;
+			}else if(!tick){		
 				komp += c;
-			}
+			}else sad += c;
 				
 			flag = in.read();
 			c = (char) flag;

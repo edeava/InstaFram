@@ -15,6 +15,13 @@ public class Proizvod implements IZTreeNode{
 	private String sadrzaj;
 
 	
+	public Proizvod(String name, String sadrzaj) {
+		super();
+		this.name = name;
+		this.sadrzaj = sadrzaj;
+	}
+
+
 	public Proizvod(String name) {
 		this.name = name;
 		this.sadrzaj = "Sadrzaj";
