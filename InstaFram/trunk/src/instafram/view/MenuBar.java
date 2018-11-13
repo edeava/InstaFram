@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import instafram.actions.AboutAction;
 import instafram.tree.view.ZTree;
 
 public class MenuBar extends JMenuBar{
@@ -91,6 +92,7 @@ public class MenuBar extends JMenuBar{
 		JMenu parametrizacija = new JMenu("Parametrizacija");
 		JMenu pomoc = new JMenu("Pomoc");
 		JMenu about = new JMenu("About");
+		about.addActionListener(new AboutAction());
 		
 		add(file);
 		add(view);

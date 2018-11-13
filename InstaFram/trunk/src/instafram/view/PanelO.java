@@ -60,5 +60,11 @@ public class PanelO extends Observable{
 	public int getLeafNumber() {
 		return leafNumber;
 	}
+
+	public void setSadrzaj(String sadrzaj) {
+		this.sadrzaj = sadrzaj;
+		setChanged();
+		notifyObservers(this);
+	}
 	
 }
