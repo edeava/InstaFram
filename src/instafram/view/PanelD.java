@@ -4,8 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,17 +13,22 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
-public class PanelD extends JPanel implements Observer{
+import instafram.tree.controller.ZTreeController;
+import instafram.tree.model.Observable;
+import instafram.tree.model.ObserverUpdate;
+import instafram.tree.model.ZTreeNode;
 
-	private TabbedPane tb;
+public class PanelD extends JPanel implements ObserverUpdate{
+
+	public TabbedPane tb;
 	private PanelO observer;
 	private JPanel dole;
 	
 	public PanelD(LayoutManager arg0) {
 		super(arg0);
 		observer = new PanelO();
-		observer.addObserver(this);
-		tb = new TabbedPane();
+	//	observer.addObserver(this);
+		tb = new TabbedPane(this);
 		dole = new JPanel();
 		JSplitPane panel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tb, dole);
 		panel.setResizeWeight(0.5);
@@ -32,18 +36,17 @@ public class PanelD extends JPanel implements Observer{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void onUpdate() {
 		dole.removeAll();
-		PanelO tmp = (PanelO) arg;
-		tb.addTab(tmp.getSadrzaj());
-		dole.add(new JLabel(tmp.getName() + " " +
-							tmp.getSadrzaj() + " " +
-							tmp.getParent() + " " +
-							tmp.getChildNumber() + " " +
-							tmp.getLeafNumber()), BorderLayout.CENTER);
+		dole.add(new JLabel(tb.node.getNode().getName() + " " +
+							tb.node.getNode().getSadrzaj() + " " +
+							tb.node.getParent() + " " +
+							tb.node.getChildCount() + " " +
+							ZTreeController.dfs(tb.node, new ArrayList<>(), tb.node.preorderEnumeration(), 0)), BorderLayout.CENTER);
 	}
 
 	public PanelO getObserver() {
 		return observer;
 	}
+	
 }

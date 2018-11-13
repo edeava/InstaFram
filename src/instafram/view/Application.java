@@ -51,8 +51,9 @@ public class Application extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
-		
-		tree = new ZTree( new ZTreeController());
+		workspace = new PanelD(new BorderLayout());
+		tree = new ZTree( new ZTreeController(), workspace.tb);
+	
 		
 		MenuBar menu = new MenuBar(tree);
 		this.setJMenuBar(menu);
@@ -61,7 +62,7 @@ public class Application extends JFrame{
 		add(toolBar, BorderLayout.NORTH);
 		
 		ToolBar tb = new ToolBar(tree);
-		workspace = new PanelD(new BorderLayout());
+	
 		workspace.add(tb, BorderLayout.NORTH);
 		
 		treeSc = new JScrollPane(tree);

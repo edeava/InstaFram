@@ -8,8 +8,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import javafx.scene.image.Image;
-
 public class AboutFrame extends JDialog{
 
 	public AboutFrame() throws HeadlessException {
