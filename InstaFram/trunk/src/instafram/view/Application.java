@@ -34,6 +34,8 @@ public class Application extends JFrame{
 
 	private static Application instance;
 	private ZTree tree;
+	private PanelD workspace;
+	private JScrollPane treeSc;
 	
 	public ZTree getTree() {
 		return tree;
@@ -59,10 +61,10 @@ public class Application extends JFrame{
 		add(toolBar, BorderLayout.NORTH);
 		
 		ToolBar tb = new ToolBar(tree);
-		PanelD workspace = new PanelD(new BorderLayout());
+		workspace = new PanelD(new BorderLayout());
 		workspace.add(tb, BorderLayout.NORTH);
 		
-		JScrollPane treeSc = new JScrollPane(tree);
+		treeSc = new JScrollPane(tree);
 		
 		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeSc, workspace);
 		split.setResizeWeight(0.25);
@@ -74,7 +76,7 @@ public class Application extends JFrame{
 
 	public static Application getInstance() {
 		if(instance == null)
-			return new Application();
+			instance = new Application();
 		return instance;
 	}
 	
@@ -82,4 +84,11 @@ public class Application extends JFrame{
 		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 	}
 
+	public PanelD getWorkspace() {
+		return workspace;
+	}
+
+	public JScrollPane getTreeSc() {
+		return treeSc;
+	}
 }

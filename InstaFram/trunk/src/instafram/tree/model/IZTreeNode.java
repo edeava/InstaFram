@@ -7,6 +7,8 @@ public interface IZTreeNode {
 	void removeNode(IZTreeNode node);
 	ArrayList<IZTreeNode> getChildren();
 	String getName();
+	String getSadrzaj();
+	void setSadrzaj(String sadrzaj);
 	void setName(String name);
 	String toString();
 }

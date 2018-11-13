@@ -29,7 +29,6 @@ public class ZTree extends JTree{
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
 		
-		
 		this.model = new ZTreeModel(root);
 		this.setModel(model);
 		this.model.addTreeModelListener(new ZTreeModelListener(this));

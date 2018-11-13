@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -14,6 +16,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import instafram.tree.model.IZTreeNode;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
+import instafram.view.Application;
 
 public class ZTreeEditor extends DefaultTreeCellEditor implements ActionListener{
 	
@@ -44,8 +47,8 @@ public class ZTreeEditor extends DefaultTreeCellEditor implements ActionListener
 
 	@Override
 	public boolean isCellEditable(EventObject event) {
-		if(event instanceof MouseEvent) {
-			if(((MouseEvent) event).getClickCount() == 2)
+		
+		if(((MouseEvent) event).getClickCount() == 3) {
 				return true;
 		}
 		return false;

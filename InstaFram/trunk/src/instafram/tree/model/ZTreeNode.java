@@ -2,6 +2,8 @@ package instafram.tree.model;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import instafram.view.PanelO;
+
 public class ZTreeNode extends DefaultMutableTreeNode{
 	private IZTreeNode node;
 	
@@ -42,5 +44,7 @@ public class ZTreeNode extends DefaultMutableTreeNode{
 			node.setName((String) arg0);
 	}
 	
-	
+	public void pukni(PanelO p) {
+		p.setNode(this);
+	}
 }

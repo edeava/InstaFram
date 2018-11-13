@@ -13,6 +13,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import instafram.tree.model.IZTreeNode;
@@ -48,7 +49,7 @@ public class ZTreeController implements IZTreeController{
 		
 		int brL = 0;
 		Enumeration<ZTreeNode> e = node.preorderEnumeration();
-		brL = this.dfs(node, new ArrayList<>(), e, brL);
+		brL = dfs(node, new ArrayList<>(), e, brL);
 		
 		if(Application.option("Brisete cvor sa " + brL + " listova, i " +
 				node.getChildCount() + " deteta.\nDa li ste sugurni?", "Paznja") == JOptionPane.YES_OPTION) {
@@ -69,7 +70,7 @@ public class ZTreeController implements IZTreeController{
 		out.close();
 	}
 	
-	public int dfs(ZTreeNode root, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e, int brListova) {
+	public static int dfs(ZTreeNode root, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e, int brListova) {
 		visited.add(root);
 		
 		while(e.hasMoreElements()) {
@@ -101,6 +102,7 @@ public class ZTreeController implements IZTreeController{
 
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		int flag = in.read();
+		boolean tick = true;
 		char c = (char) flag;
 		String komp = "";
 			
