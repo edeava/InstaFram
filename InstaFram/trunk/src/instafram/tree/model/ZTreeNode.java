@@ -1,10 +1,15 @@
 package instafram.tree.model;
 
+import java.util.ArrayList;
+import java.util.Observer;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import instafram.view.PanelO;
 
-public class ZTreeNode extends DefaultMutableTreeNode{
+public class ZTreeNode extends DefaultMutableTreeNode implements ObserverUpdate, Observable{
+	
+	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
 	private IZTreeNode node;
 	
 	public ZTreeNode(IZTreeNode node) {
@@ -43,8 +48,22 @@ public class ZTreeNode extends DefaultMutableTreeNode{
 		if(arg0 instanceof String)
 			node.setName((String) arg0);
 	}
-	
-	public void pukni(PanelO p) {
-		p.setNode(this);
+
+	@Override
+	public void notifyObserver() {
+		for(ObserverUpdate o : observers) {
+			o.notify();
+		}
+	}
+
+	@Override
+	public void addObserver(ObserverUpdate o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void onUpdate() {
+		// TODO Auto-generated method stub
+		
 	}
 }

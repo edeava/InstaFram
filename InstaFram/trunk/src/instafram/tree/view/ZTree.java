@@ -10,10 +10,12 @@ import javax.swing.tree.TreeSelectionModel;
 import instafram.tree.actions.ZTreeActionManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.controller.ZTreeModelListener;
+import instafram.tree.model.Observable;
 import instafram.tree.model.ZTreeModel;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
 import instafram.view.Application;
+import instafram.view.TabbedPane;
 
 public class ZTree extends JTree{
 	private IZTreeController controller;
@@ -21,11 +23,12 @@ public class ZTree extends JTree{
 	private ZTreeActionManager actionManager;
 	private ZTreeNode root;
 	
-	public ZTree(IZTreeController controller) {
+	public ZTree(IZTreeController controller, TabbedPane tb) {
 		root = new ZTreeNode(new Proizvod("Pro"));
 		this.controller = controller;
 		this.controller.setTree(this);
 		this.actionManager = new ZTreeActionManager(controller);
+		actionManager.tabedP = tb;
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
 		

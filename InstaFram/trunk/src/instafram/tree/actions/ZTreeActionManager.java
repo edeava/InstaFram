@@ -5,9 +5,11 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
 import instafram.tree.controller.IZTreeController;
+import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
 import instafram.view.Application;
+import instafram.view.TabbedPane;
 
 public class ZTreeActionManager implements TreeSelectionListener{
 	private AddNodeAction addNode;
@@ -15,6 +17,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private EditNodeAction editNode;
 	private SaveTreeAction saveAction;
 	private LoadTreeAction loadAction;
+	public TabbedPane tabedP;
 		
 	public ZTreeActionManager(IZTreeController controller) {
 		this.addNode = new AddNodeAction(controller);
@@ -36,7 +39,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.saveAction.setSelectedNode(selectedNode);
 			this.loadAction.setSelectedNode(selectedNode);
 			
-			selectedNode.pukni(Application.getInstance().getWorkspace().getObserver());
+			selectedNode.notifyObserver();
+			tabedP.addTab(selectedNode);
 		}
 	}
 
