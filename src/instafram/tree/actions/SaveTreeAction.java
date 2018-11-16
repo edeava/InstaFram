@@ -27,12 +27,14 @@ public class SaveTreeAction extends ZTreeAbsAction{
 		if(approved == JFileChooser.APPROVE_OPTION) {
 			file = chooser.getSelectedFile();
 		
-			if(selectedNode != null)
-				try {
-					controller.saveTree(selectedNode, file);
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null, "Fajl ne postoji!");
-				}
+			if(selectedNode == null)
+				selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
+			
+			try {
+				controller.saveTree(selectedNode, file);
+			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "Fajl ne postoji!");
+			}
 		}
 	}
 }

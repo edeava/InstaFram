@@ -1,10 +1,9 @@
 package instafram.view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
@@ -92,7 +91,7 @@ public class MenuBar extends JMenuBar{
 		JMenu parametrizacija = new JMenu("Parametrizacija");
 		JMenu pomoc = new JMenu("Pomoc");
 		JMenu about = new JMenu("About");
-		about.addActionListener(new AboutAction());
+		about.add(new AboutAction());
 		
 		add(file);
 		add(view);

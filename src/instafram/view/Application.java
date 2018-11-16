@@ -52,7 +52,7 @@ public class Application extends JFrame{
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		workspace = new PanelD(new BorderLayout());
-		tree = new ZTree( new ZTreeController(), workspace.tb);
+		tree = new ZTree( new ZTreeController());
 	
 		
 		MenuBar menu = new MenuBar(tree);

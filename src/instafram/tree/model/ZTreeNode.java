@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import instafram.view.PanelO;
 
-public class ZTreeNode extends DefaultMutableTreeNode implements ObserverUpdate, Observable{
+public class ZTreeNode extends DefaultMutableTreeNode implements Observable{
 	
 	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
 	private IZTreeNode node;
@@ -52,7 +52,7 @@ public class ZTreeNode extends DefaultMutableTreeNode implements ObserverUpdate,
 	@Override
 	public void notifyObserver() {
 		for(ObserverUpdate o : observers) {
-			o.notify();
+			o.onUpdate();
 		}
 	}
 
@@ -60,10 +60,9 @@ public class ZTreeNode extends DefaultMutableTreeNode implements ObserverUpdate,
 	public void addObserver(ObserverUpdate o) {
 		observers.add(o);
 	}
-
-	@Override
-	public void onUpdate() {
-		// TODO Auto-generated method stub
-		
+	
+	public void setSadrzaj(String sadrzaj) {
+		this.node.setSadrzaj(sadrzaj);
+		notifyObserver();
 	}
 }

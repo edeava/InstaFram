@@ -48,5 +48,12 @@ public class PanelD extends JPanel implements ObserverUpdate{
 	public PanelO getObserver() {
 		return observer;
 	}
-	
+
+	public TabbedPane getTb() {
+		return tb;
+	}
+
+	public JPanel getDole() {
+		return dole;
+	}
 }

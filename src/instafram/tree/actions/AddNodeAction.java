@@ -23,6 +23,6 @@ public class AddNodeAction extends ZTreeAbsAction{
 	public void actionPerformed(ActionEvent e) {
 		if(selectedNode == null)
 			selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
-			controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
+		controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
 	}
 }
