@@ -8,6 +8,12 @@ import instafram.view.AboutFrame;
 
 public class AboutAction extends AbstractAction{
 
+	
+	public AboutAction() {
+		super();
+		setEnabled(false);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		AboutFrame aFrame = new AboutFrame();

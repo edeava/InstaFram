@@ -10,7 +10,6 @@ import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import instafram.actions.UpdateSadrzajAction;
 import instafram.tree.model.ZTreeNode;
 
 public class TabbedPane extends JTabbedPane{
@@ -30,17 +29,18 @@ public class TabbedPane extends JTabbedPane{
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				node.getNode().setSadrzaj(ta.getText());
+				node.setSadrzaj(ta.getText());
+				
 			}
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				node.getNode().setSadrzaj(ta.getText());
+				node.setSadrzaj(ta.getText());
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				node.getNode().setSadrzaj(ta.getText());
+				node.setSadrzaj(ta.getText());
 			}
 		});
 		

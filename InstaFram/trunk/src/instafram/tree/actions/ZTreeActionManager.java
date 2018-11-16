@@ -17,7 +17,6 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private EditNodeAction editNode;
 	private SaveTreeAction saveAction;
 	private LoadTreeAction loadAction;
-	public TabbedPane tabedP;
 		
 	public ZTreeActionManager(IZTreeController controller) {
 		this.addNode = new AddNodeAction(controller);
@@ -33,14 +32,15 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		
 		if(path != null) {
 			ZTreeNode selectedNode = (ZTreeNode) path.getPathComponent(path.getPathCount() - 1);
+			selectedNode.addObserver(Application.getInstance().getWorkspace());
+			
 			this.addNode.setSelectedNode(selectedNode);
 			this.removeNode.setSelectedNode(selectedNode);
 			this.editNode.setSelectedNode(selectedNode);
 			this.saveAction.setSelectedNode(selectedNode);
 			this.loadAction.setSelectedNode(selectedNode);
 			
-			selectedNode.notifyObserver();
-			tabedP.addTab(selectedNode);
+			Application.getInstance().getWorkspace().getTb().addTab(selectedNode);
 		}
 	}
 

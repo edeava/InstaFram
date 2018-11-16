@@ -23,12 +23,11 @@ public class ZTree extends JTree{
 	private ZTreeActionManager actionManager;
 	private ZTreeNode root;
 	
-	public ZTree(IZTreeController controller, TabbedPane tb) {
+	public ZTree(IZTreeController controller) {
 		root = new ZTreeNode(new Proizvod("Pro"));
 		this.controller = controller;
 		this.controller.setTree(this);
 		this.actionManager = new ZTreeActionManager(controller);
-		actionManager.tabedP = tb;
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
 		
