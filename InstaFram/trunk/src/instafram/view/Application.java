@@ -66,7 +66,8 @@ public class Application extends JFrame{
 		add(toolBar, BorderLayout.NORTH);
 		
 		ToolBar tb = new ToolBar(tree);
-	
+		tb.setRemoveAction(workspace.getTb());
+		
 		workspace.add(tb, BorderLayout.NORTH);
 		
 		treeSc = new JScrollPane(tree);
@@ -77,6 +78,9 @@ public class Application extends JFrame{
 		
 		JLabel lb = new JLabel("Status bar");
 		add(lb, BorderLayout.SOUTH);
+		
+		if(Application.option("Da li zelite da ucitate postojeci projekat?", "Ucitavanje") == JOptionPane.YES_OPTION)
+			tree.getActionManager().getLoadAction().actionPerformed(null);
 	}
 
 	public static Application getInstance() {
