@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class AboutFrame extends JDialog{
 
@@ -18,7 +19,10 @@ public class AboutFrame extends JDialog{
 		
 		JPanel panel = new JPanel(new BorderLayout());
 		
-		panel.add(new JLabel("Stefan Zivkovic RN14/17"), BorderLayout.NORTH);
+		JLabel lb = new JLabel("Stefan Zivkovic RN14/17");
+		lb.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		panel.add(lb, BorderLayout.NORTH);
 		
 		panel.add(new JLabel(new ImageIcon("Img/ja.jpg")), BorderLayout.CENTER);
 		

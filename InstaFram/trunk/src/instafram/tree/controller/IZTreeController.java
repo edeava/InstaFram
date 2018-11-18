@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import instafram.tree.model.IZTreeNode;
+import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
 import instafram.tree.view.ZTree;
 
@@ -16,5 +17,6 @@ public interface IZTreeController {
 	public void removeNode(ZTreeNode node);
 	public void saveTree(ZTreeNode root, File file) throws IOException;
 	public void loadTree(ZTreeNode root, File file) throws IOException, FileNotFoundException;
+	public void addObservers(ObserverUpdate o);
 }
 	

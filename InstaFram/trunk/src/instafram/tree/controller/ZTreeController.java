@@ -17,6 +17,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import instafram.tree.model.IZTreeNode;
+import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
 import instafram.tree.view.ZTree;
 import instafram.treeComponent.model.Proizvod;
@@ -25,6 +26,7 @@ import instafram.view.Application;
 public class ZTreeController implements IZTreeController{
 
 	private ZTree tree;
+	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
 	
 	@Override
 	public void setTree(ZTree tree) {
@@ -34,6 +36,9 @@ public class ZTreeController implements IZTreeController{
 	@Override
 	public void addNode(ZTreeNode parent, IZTreeNode node) {
 		ZTreeNode newChild = new ZTreeNode(node);
+		for(ObserverUpdate o : observers)
+			newChild.addObserver(o);
+		
 		tree.getModel().insertNodeInto(newChild, parent, parent.getChildCount());
 		parent.addNode(node);
 	}
@@ -144,5 +149,9 @@ public class ZTreeController implements IZTreeController{
 	@Override
 	public ZTree getTree() {
 		return tree;
+	}
+	
+	public void addObservers(ObserverUpdate o) {
+		observers.add(o);
 	}
 }

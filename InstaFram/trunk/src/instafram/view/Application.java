@@ -53,7 +53,11 @@ public class Application extends JFrame{
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		workspace = new PanelD(new BorderLayout());
 		tree = new ZTree( new ZTreeController());
-	
+		tree.getController().addObservers(workspace.getDesnoDole());
+		tree.getController().addObservers(workspace.getTb());
+
+		((ZTreeNode) tree.getModel().getRoot()).addObserver(workspace.getDesnoDole());
+		((ZTreeNode) tree.getModel().getRoot()).addObserver(workspace.getTb());
 		
 		MenuBar menu = new MenuBar(tree);
 		this.setJMenuBar(menu);

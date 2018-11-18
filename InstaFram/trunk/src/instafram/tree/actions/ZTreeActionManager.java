@@ -1,5 +1,7 @@
 package instafram.tree.actions;
 
+import java.util.ArrayList;
+
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
@@ -32,7 +34,6 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		
 		if(path != null) {
 			ZTreeNode selectedNode = (ZTreeNode) path.getPathComponent(path.getPathCount() - 1);
-			selectedNode.addObserver(Application.getInstance().getWorkspace());
 			
 			this.addNode.setSelectedNode(selectedNode);
 			this.removeNode.setSelectedNode(selectedNode);
@@ -40,7 +41,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.saveAction.setSelectedNode(selectedNode);
 			this.loadAction.setSelectedNode(selectedNode);
 			
-			Application.getInstance().getWorkspace().getTb().addTab(selectedNode);
+			selectedNode.notifyObserver();
 		}
 	}
 
