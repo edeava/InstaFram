@@ -91,7 +91,10 @@ public class MenuBar extends JMenuBar{
 		JMenu parametrizacija = new JMenu("Parametrizacija");
 		JMenu pomoc = new JMenu("Pomoc");
 		JMenu about = new JMenu("About");
-		about.add(new AboutAction());
+		
+		JMenuItem aboutMe = new JMenuItem("About Developer");
+		aboutMe.addActionListener(new AboutAction());
+		about.add(aboutMe);
 		
 		add(file);
 		add(view);

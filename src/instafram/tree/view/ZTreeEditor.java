@@ -30,7 +30,7 @@ public class ZTreeEditor extends DefaultTreeCellEditor implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(node != null) {
-			((ZTreeNode) node).getNode().setName(e.getActionCommand());
+			((ZTreeNode) node).setName(e.getActionCommand());
 			System.out.println("Akcija");
 		}
 	}
