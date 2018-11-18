@@ -92,7 +92,7 @@ public class ZTreeController implements IZTreeController{
 
 	public static void dfs(ZTreeNode root, BufferedWriter out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
 		visited.add(root);
-		out.write(root.getNode().getName() + "{" + root.getNode().getSadrzaj() + "}" + " ");
+		out.write(root.getNode().getName() + "{" + root.getNode().getSadrzaj() + "}" + "ð");
 		
 		while(e.hasMoreElements()) {
 			ZTreeNode next = (ZTreeNode) e.nextElement();
@@ -113,9 +113,11 @@ public class ZTreeController implements IZTreeController{
 		String komp = "", sad = "";
 			
 		while(flag != -1) {
-			if(c == ' ') {
+			if(c == 'ð') {
 				if(root == null) {
 					root = new ZTreeNode(new Proizvod(komp, sad));
+					for(ObserverUpdate o : observers)
+						root.addObserver(o);
 					tree.setRoot(root);
 					visited.add(root);
 				}

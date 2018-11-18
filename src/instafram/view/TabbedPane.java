@@ -38,9 +38,19 @@ public class TabbedPane extends JTabbedPane implements ObserverUpdate{
 		this.setTitleAt(getSelectedIndex(), node.getNode().getName());
 	}
 
+	public void removeTab() {
+		
+	}
+	
 	@Override
 	public void onUpdate(ZTreeNode node) {
 		addTab(node);
+	}
+	
+	@Override
+	public void remove(Component component) {
+		nodes.remove(this.getSelectedIndex());
+		super.remove(component);
 	}
 
 }

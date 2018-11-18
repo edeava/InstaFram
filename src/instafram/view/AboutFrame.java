@@ -27,6 +27,7 @@ public class AboutFrame extends JDialog{
 		panel.add(new JLabel(new ImageIcon("Img/ja.jpg")), BorderLayout.CENTER);
 		
 		this.add(panel);
+		this.pack();
 		setVisible(true);
 	}
 	

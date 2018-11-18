@@ -24,7 +24,7 @@ public class ZTree extends JTree{
 	private ZTreeNode root;
 	
 	public ZTree(IZTreeController controller) {
-		root = new ZTreeNode(new Proizvod("Pro"));
+		root = new ZTreeNode(new Proizvod("Proizvodi"));
 		this.controller = controller;
 		this.controller.setTree(this);
 		this.actionManager = new ZTreeActionManager(controller);
@@ -40,9 +40,7 @@ public class ZTree extends JTree{
 		this.setShowsRootHandles(true);
 		this.setEditable(true);
 		
-		if(Application.option("Da li zelite da ucitate postojeci projekat?", "Ucitavanje") == JOptionPane.YES_OPTION)
-			actionManager.getLoadAction().actionPerformed(null);
-		else setRoot(new ZTreeNode(new Proizvod("Proizvodi")));
+		
 		
 	}
 
