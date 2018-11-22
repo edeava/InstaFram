@@ -24,6 +24,7 @@ import javax.swing.JTree;
 import javax.swing.border.Border;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import instafram.actions.CloseListener;
 import instafram.tree.actions.ZTreeActionManager;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ZTreeNode;
@@ -48,7 +49,7 @@ public class Application extends JFrame{
 		Dimension scrSize = kit.getScreenSize();
 		setSize(scrSize.width / 2, scrSize.height / 2);
 		setTitle("InstaFram");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		workspace = new PanelD(new BorderLayout());
@@ -81,6 +82,10 @@ public class Application extends JFrame{
 		
 		if(Application.option("Da li zelite da ucitate postojeci projekat?", "Ucitavanje") == JOptionPane.YES_OPTION)
 			tree.getActionManager().getLoadAction().actionPerformed(null);
+		
+		CloseListener close = new CloseListener();
+		close.setSave(tree.getActionManager().getSaveAction());
+		this.addWindowListener(close);
 	}
 
 	public static Application getInstance() {
