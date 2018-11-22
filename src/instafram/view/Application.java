@@ -80,12 +80,12 @@ public class Application extends JFrame{
 		JLabel lb = new JLabel("Status bar");
 		add(lb, BorderLayout.SOUTH);
 		
-		if(Application.option("Da li zelite da ucitate postojeci projekat?", "Ucitavanje") == JOptionPane.YES_OPTION)
-			tree.getActionManager().getLoadAction().actionPerformed(null);
-		
 		CloseListener close = new CloseListener();
 		close.setSave(tree.getActionManager().getSaveAction());
 		this.addWindowListener(close);
+		
+		if(Application.option("Da li zelite da ucitate postojeci projekat?", "Ucitavanje") == JOptionPane.YES_OPTION)
+			tree.getActionManager().getLoadAction().actionPerformed(null);
 	}
 
 	public static Application getInstance() {

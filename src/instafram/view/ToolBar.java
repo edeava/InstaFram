@@ -39,7 +39,7 @@ public class ToolBar extends JToolBar{
 		add(btnClose);
 		
 		btnSwitch = new JButton();
-		btnSwitch.setToolTipText("Switch");
+		btnSwitch.setToolTipText("Exit Tab");
 		btnSwitch.setIcon(new ImageIcon("Img/switch.png"));
 		add(btnSwitch);
 		
