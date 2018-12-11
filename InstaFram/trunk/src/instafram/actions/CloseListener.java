@@ -28,8 +28,10 @@ public class CloseListener implements WindowListener{
 		int result = JOptionPane.showConfirmDialog(null, "Da li zelite da sacuvate?", 
 													"Izlaz", 
 													JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-		if(result == JOptionPane.YES_OPTION)
+		if(result == JOptionPane.YES_OPTION) {
 			save.actionPerformed(null);
+			System.exit(0);
+		}
 		else if(result == JOptionPane.NO_OPTION) 
 			System.exit(0);
 	}

@@ -12,11 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import instafram.actions.LogInAction;
-
 public class LogInFrame extends JDialog{
 
-	private boolean yes = false;
 	JTextField tfUsername;
 	JTextField tfPassword;
 	JButton btnLogIn;
@@ -48,11 +45,6 @@ public class LogInFrame extends JDialog{
 		this.pack();
 		setVisible(true);
 		
-		btnLogIn.addActionListener(new LogInAction(this));
-	}
-
-	public boolean isYes() {
-		return ((LogInAction) btnLogIn.getActionListeners()[0]).isYes();
 	}
 
 	public JTextField getTfUsername() {
