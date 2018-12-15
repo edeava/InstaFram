@@ -5,6 +5,8 @@ import java.util.Observer;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import instafram.treeComponent.model.Parametar;
+
 public class ZTreeNode extends DefaultMutableTreeNode implements Observable{
 	
 	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
