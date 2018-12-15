@@ -25,6 +25,7 @@ public class MenuBar extends JMenuBar{
 		JMenuItem mNew = new JMenuItem("mNew");
 		mNew.setIcon(new ImageIcon("Img/new.png"));
 		mNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.VK_ALT));
+		mNew.addActionListener(tree.getActionManager().getAddNode());
 		
 		JMenuItem mOpen = new JMenuItem("mOpen");
 		mOpen.setIcon(new ImageIcon("Img/open.jpg"));

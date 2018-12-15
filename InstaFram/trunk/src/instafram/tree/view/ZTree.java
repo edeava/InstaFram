@@ -24,11 +24,11 @@ public class ZTree extends JTree{
 	private ZTreeNode root;
 	
 	public ZTree(IZTreeController controller) {
-		root = new ZTreeNode(new Proizvod("Proizvodi"));
+		root = new ZTreeNode(new Proizvod("Kompanija"));
 		this.controller = controller;
 		this.controller.setTree(this);
 		this.actionManager = new ZTreeActionManager(controller);
-		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		this.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 		
 		
 		this.model = new ZTreeModel(root);
