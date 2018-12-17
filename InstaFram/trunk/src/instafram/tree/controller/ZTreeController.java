@@ -27,6 +27,7 @@ public class ZTreeController implements IZTreeController{
 
 	private ZTree tree;
 	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
+	private boolean changed = true;
 	
 	@Override
 	public void setTree(ZTree tree) {
@@ -41,6 +42,7 @@ public class ZTreeController implements IZTreeController{
 		
 		tree.getModel().insertNodeInto(newChild, parent, parent.getChildCount());
 		parent.addNode(node);
+		changed = true;
 	}
 
 	@Override
@@ -62,17 +64,21 @@ public class ZTreeController implements IZTreeController{
 			//parent.removeNode(node.getNode());
 			this.tree.getModel().removeNodeFromParent(node);
 			this.tree.setSelectionPath(new TreePath(parent.getPath()));
+			changed = true;
 		}
 	}
 
 	@Override
 	public void saveTree(ZTreeNode root, File file) throws IOException{
+		if(!changed)
+			return;
 		BufferedWriter out = new BufferedWriter(new FileWriter(file));
 		Enumeration<ZTreeNode> e = root.preorderEnumeration();
 			
 		dfs(root, out, new ArrayList<>(), e);
 			
 		out.close();
+		changed = true;
 	}
 	
 	public static int dfs(ZTreeNode root, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e, int brListova) {
@@ -92,7 +98,7 @@ public class ZTreeController implements IZTreeController{
 
 	public static void dfs(ZTreeNode root, BufferedWriter out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
 		visited.add(root);
-		out.write(root.getNode().getName() + "{" + root.getNode().getSadrzaj() + "}" + "ð");
+		out.write(root.getNode().getName() + "{" + "}" + "ð");
 		
 		while(e.hasMoreElements()) {
 			ZTreeNode next = (ZTreeNode) e.nextElement();

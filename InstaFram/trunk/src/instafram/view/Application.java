@@ -24,7 +24,7 @@ import javax.swing.JTree;
 import javax.swing.border.Border;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import instafram.actions.CloseListener;
+import instafram.actions.FrameCloseListener;
 import instafram.tree.actions.ZTreeActionManager;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ZTreeNode;
@@ -80,7 +80,7 @@ public class Application extends JFrame{
 		JLabel lb = new JLabel("Status bar");
 		add(lb, BorderLayout.SOUTH);
 		
-		CloseListener close = new CloseListener();
+		FrameCloseListener close = new FrameCloseListener();
 		close.setSave(tree.getActionManager().getSaveAction());
 		this.addWindowListener(close);
 		

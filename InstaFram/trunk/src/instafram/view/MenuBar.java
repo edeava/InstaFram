@@ -40,9 +40,11 @@ public class MenuBar extends JMenuBar{
 		JMenuItem mSave = new JMenuItem("mSave");
 		mSave.setIcon(new ImageIcon("Img/save.png"));
 		mSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.VK_ALT));
+		mSave.addActionListener(tree.getActionManager().getSaveAction());
 		JMenuItem mSaveAs = new JMenuItem("mSave");
 		mSaveAs.setIcon(new ImageIcon("Img/saveAs.png"));
 		mSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, KeyEvent.VK_ALT));
+		mSaveAs.addActionListener(tree.getActionManager().getSaveAs());
 		
 		JMenu mExport = new JMenu("mExport");
 		JMenuItem mExpToPdf = new JMenuItem("mExpToPdf");

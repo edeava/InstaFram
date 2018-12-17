@@ -11,6 +11,7 @@ import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Modul;
 import instafram.treeComponent.model.Parametar;
 import instafram.treeComponent.model.Proizvod;
+import instafram.treeComponent.view.ParametarEditDialog;
 import instafram.view.Application;
 
 public class AddNodeAction extends ZTreeAbsAction{
@@ -28,8 +29,14 @@ public class AddNodeAction extends ZTreeAbsAction{
 		
 		if(selectedNode.getNode() instanceof Proizvod && !selectedNode.isRoot())
 			controller.addNode(selectedNode, new Modul("Modul" + AddNodeAction.i++));
-		else if(selectedNode.getNode() instanceof Modul)
-			controller.addNode(selectedNode, new Parametar("Parametar" + (selectedNode.getChildCount() + 1)));
+		else if(selectedNode.getNode() instanceof Modul) {
+			ParametarEditDialog pD = new ParametarEditDialog();
+			pD.setModal(true);
+			pD.setVisible(true);
+			Parametar p = pD.createParametar("Parametar" + (selectedNode.getChildCount() + 1));
+			if(p != null)
+				controller.addNode(selectedNode, p);
+		}
 		else
 			controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
 	}
