@@ -19,18 +19,18 @@ public class ZDocumentListener implements DocumentListener{
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
-		node.setSadrzaj(ta.getText());
+		//node.setSadrzaj(ta.getText());
 		
 	}
 	
 	@Override
 	public void insertUpdate(DocumentEvent e) {
-		node.setSadrzaj(ta.getText());
+		//node.setSadrzaj(ta.getText());
 	}
 	
 	@Override
 	public void changedUpdate(DocumentEvent e) {
-		node.setSadrzaj(ta.getText());
+		//node.setSadrzaj(ta.getText());
 	}
 
 }

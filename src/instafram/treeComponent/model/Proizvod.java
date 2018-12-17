@@ -12,19 +12,15 @@ import instafram.view.Application;
 public class Proizvod implements IZTreeNode{
 
 	private String name;
-	private String sadrzaj;
-
 	
 	public Proizvod(String name, String sadrzaj) {
 		super();
 		this.name = name;
-		this.sadrzaj = sadrzaj;
 	}
 
 
 	public Proizvod(String name) {
 		this.name = name;
-		this.sadrzaj = "Sadrzaj";
 	}
 
 
@@ -45,17 +41,6 @@ public class Proizvod implements IZTreeNode{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-	public String getSadrzaj() {
-		return sadrzaj;
-	}
-	
-	@Override
-	public void setSadrzaj(String sadrzaj) {
-		this.sadrzaj = sadrzaj;
-	}
-
 
 	@Override
 	public String getName() {

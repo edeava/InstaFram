@@ -61,11 +61,6 @@ public class ZTreeNode extends DefaultMutableTreeNode implements Observable{
 		observers.add(o);
 	}
 	
-	public void setSadrzaj(String sadrzaj) {
-		this.node.setSadrzaj(sadrzaj);
-		notifyObserver();
-	}
-	
 	public void setName(String name) {
 		this.node.setName(name);
 		notifyObserver();

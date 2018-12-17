@@ -7,12 +7,17 @@ import instafram.tree.model.IZTreeNode;
 public class Parametar implements IZTreeNode{
 
 	private String name;
-	private String sadrzaj;
+	private PredefinedParameter gui;
 	
 	public Parametar(String name) {
 		super();
 		this.name = name;
-		this.sadrzaj = "Sadrzaj";
+	}
+
+	public Parametar(String name, PredefinedParameter gui) {
+		super();
+		this.name = name;
+		this.gui = gui;
 	}
 
 	@Override
@@ -39,16 +44,6 @@ public class Parametar implements IZTreeNode{
 	}
 
 	@Override
-	public String getSadrzaj() {
-		return this.sadrzaj;
-	}
-
-	@Override
-	public void setSadrzaj(String sadrzaj) {
-		this.sadrzaj = sadrzaj;
-	}
-
-	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -58,5 +53,11 @@ public class Parametar implements IZTreeNode{
 		return name;
 	}
 
-	
+	public PredefinedParameter getGui() {
+		return gui;
+	}
+
+	public void setGui(PredefinedParameter gui) {
+		this.gui = gui;
+	}
 }

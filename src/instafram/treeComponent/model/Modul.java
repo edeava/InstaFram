@@ -7,12 +7,10 @@ import instafram.tree.model.IZTreeNode;
 public class Modul implements IZTreeNode{
 
 	private String name;
-	private String sadrzaj;
 
 	public Modul(String name) {
 		super();
 		this.name = name;
-		this.sadrzaj = "Sadrzaj";
 	}
 
 	@Override
@@ -36,16 +34,6 @@ public class Modul implements IZTreeNode{
 	@Override
 	public String getName() {
 		return this.name;
-	}
-
-	@Override
-	public String getSadrzaj() {
-		return this.sadrzaj;
-	}
-
-	@Override
-	public void setSadrzaj(String sadrzaj) {
-		this.sadrzaj = sadrzaj;
 	}
 
 	@Override

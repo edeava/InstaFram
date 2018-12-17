@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import instafram.tree.actions.SaveTreeAction;
 
-public class CloseListener implements WindowListener{
+public class FrameCloseListener implements WindowListener{
 
 	private SaveTreeAction save;
 	

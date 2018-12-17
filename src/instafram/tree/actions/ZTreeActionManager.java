@@ -19,6 +19,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private EditNodeAction editNode;
 	private SaveTreeAction saveAction;
 	private LoadTreeAction loadAction;
+	private SaveAsTreeAction saveAs;
 		
 	public ZTreeActionManager(IZTreeController controller) {
 		this.addNode = new AddNodeAction(controller);
@@ -26,6 +27,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		this.editNode = new EditNodeAction(controller);
 		this.saveAction = new SaveTreeAction(controller);
 		this.loadAction = new LoadTreeAction(controller);
+		this.saveAs = new SaveAsTreeAction(controller);
 	}
 
 	@Override
@@ -40,6 +42,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.editNode.setSelectedNode(selectedNode);
 			this.saveAction.setSelectedNode(selectedNode);
 			this.loadAction.setSelectedNode(selectedNode);
+			this.saveAs.setSelectedNode(selectedNode);
 			
 			selectedNode.notifyObserver();
 		}
@@ -66,5 +69,9 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	
 	public SaveTreeAction getSaveAction() {
 		return saveAction;
+	}
+
+	public SaveAsTreeAction getSaveAs() {
+		return saveAs;
 	}
 }
