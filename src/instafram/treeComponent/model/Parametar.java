@@ -8,6 +8,7 @@ public class Parametar implements IZTreeNode{
 
 	private String name;
 	private PredefinedParameter gui;
+	private String vrednost;
 	
 	public Parametar(String name) {
 		super();

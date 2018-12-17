@@ -28,7 +28,7 @@ public class AddNodeAction extends ZTreeAbsAction{
 			selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
 		
 		if(selectedNode.getNode() instanceof Proizvod && !selectedNode.isRoot())
-			controller.addNode(selectedNode, new Modul("Modul" + AddNodeAction.i++));
+			controller.addNode(selectedNode, new Modul("Modul" + (selectedNode.getChildCount() + 1)));
 		else if(selectedNode.getNode() instanceof Modul) {
 			ParametarEditDialog pD = new ParametarEditDialog();
 			pD.setModal(true);

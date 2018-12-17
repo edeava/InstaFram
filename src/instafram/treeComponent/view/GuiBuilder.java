@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,12 +49,16 @@ public class GuiBuilder {
 			box.add(sp);
 		}
 		else if(gui == PredefinedParameter.LOOK_AND_FEEL) {
+			ButtonGroup bg = new ButtonGroup();
 			JCheckBox cb1 = new JCheckBox("Windows");
 			box.add(cb1);
+			bg.add(cb1);
 			JCheckBox cb2 = new JCheckBox("MacOS");
 			box.add(cb2);
+			bg.add(cb2);
 			JCheckBox cb3 = new JCheckBox("Linux");
 			box.add(cb3);
+			bg.add(cb3);
 		}
 		else if(gui == PredefinedParameter.DESKTOP_SHORTCUT) {
 			JCheckBox cb = new JCheckBox("Da li zelite desktop precicu?");
@@ -61,6 +67,48 @@ public class GuiBuilder {
 		else if(gui == PredefinedParameter.RUN_AFTER_FINISH) {
 			JCheckBox cb = new JCheckBox("Da li zelite da pokrenete aplikaciju nakon zavrsetka instalacije?");
 			box.add(cb);
+		}
+		else {
+			Box b1 = Box.createHorizontalBox();
+			JLabel lb = new JLabel("Label");
+			JTextField tf = new JTextField(10);
+			b1.add(lb);
+			b1.add(tf);
+			box.add(b1);
+			
+			if(gui == PredefinedParameter.TEXT) {
+				JTextField tf1 = new JTextField(15);
+				box.add(tf1);
+			}
+			else if(gui == PredefinedParameter.CHECK_BOX) {
+				JCheckBox cb = new JCheckBox();
+				box.add(cb);
+			}
+			else if(gui == PredefinedParameter.DROP_DOWN) {
+				JComboBox<String> cb = new JComboBox<>();
+				box.add(cb);
+				JTextField tfC = new JTextField(10);
+				JButton btn = new JButton("Dodaj");
+				Box b2 = Box.createHorizontalBox();
+				b2.add(tfC);
+				b2.add(btn);
+				box.add(b2);
+				
+				btn.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						cb.addItem(tfC.getText());
+						
+					}
+				});
+			}
+			else if(gui == PredefinedParameter.CHOOSER) {
+				browse(box, false, "");
+			}
+			else if(gui == PredefinedParameter.IMAGE) {
+				browse(box, true, "");
+			}
 		}
 		return box;
 	}

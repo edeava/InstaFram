@@ -69,8 +69,10 @@ public class ZTreeController implements IZTreeController{
 	}
 
 	@Override
-	public void saveTree(ZTreeNode root, File file) throws IOException{
+	public void saveTree(ZTreeNode root, File file) throws IOException, FileNotFoundException{
 		if(!changed)
+			return;
+		if(file == null)
 			return;
 		BufferedWriter out = new BufferedWriter(new FileWriter(file));
 		Enumeration<ZTreeNode> e = root.preorderEnumeration();
