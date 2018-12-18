@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
+import instafram.treeComponent.model.Proizvod;
 
 public class LoadTreeAction extends ZTreeAbsAction{
 
@@ -28,9 +29,17 @@ public class LoadTreeAction extends ZTreeAbsAction{
 			file = chooser.getSelectedFile();
 		
 			try {
+				if(selectedNode == null)
+					selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
+				
+				while(!(selectedNode.getNode() instanceof Proizvod))
+					selectedNode = (ZTreeNode) selectedNode.getParent();
+				
 				controller.loadTree(selectedNode, file);
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Fajl ne postoji!");
+				//JOptionPane.showMessageDialog(null, "Fajl ne postoji!");
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Klasa ne postoji!");
 			}
 		}
 	}

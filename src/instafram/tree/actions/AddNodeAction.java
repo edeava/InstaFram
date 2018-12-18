@@ -37,6 +37,9 @@ public class AddNodeAction extends ZTreeAbsAction{
 			if(p != null)
 				controller.addNode(selectedNode, p);
 		}
+		else if(selectedNode.getNode() instanceof Parametar) {
+			//nista
+		}
 		else
 			controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
 	}
