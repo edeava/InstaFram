@@ -3,10 +3,14 @@ package instafram.tree.controller;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -20,6 +24,7 @@ import instafram.tree.model.IZTreeNode;
 import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
 import instafram.tree.view.ZTree;
+import instafram.treeComponent.model.Parametar;
 import instafram.treeComponent.model.Proizvod;
 import instafram.view.Application;
 
@@ -74,11 +79,12 @@ public class ZTreeController implements IZTreeController{
 			return;
 		if(file == null)
 			return;
-		BufferedWriter out = new BufferedWriter(new FileWriter(file));
+		
+		FileOutputStream fileOut = new FileOutputStream(file);
+		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		Enumeration<ZTreeNode> e = root.preorderEnumeration();
 			
 		dfs(root, out, new ArrayList<>(), e);
-			
 		out.close();
 		changed = true;
 	}
@@ -98,29 +104,51 @@ public class ZTreeController implements IZTreeController{
 		return brListova;
 	}
 
-	public static void dfs(ZTreeNode root, BufferedWriter out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
+	public static void dfs(ZTreeNode root, ObjectOutputStream out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
 		visited.add(root);
-		out.write(root.getNode().getName() + "{" + "}" + "ð");
+		out.writeObject(root);
 		
 		while(e.hasMoreElements()) {
 			ZTreeNode next = (ZTreeNode) e.nextElement();
 			if(!visited.contains(next))
 				dfs(next, out, visited, next.preorderEnumeration());
 		}
-		out.write(")");
 	}
 	
 	@Override
-	public void loadTree(ZTreeNode root, File file) throws IOException, FileNotFoundException{
+	public void loadTree(ZTreeNode root, File file) throws IOException, FileNotFoundException, ClassNotFoundException{
 
-		BufferedReader in = new BufferedReader(new FileReader(file));
-		int flag = in.read();
+		FileInputStream fileIn = new FileInputStream(file);
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		//int flag = in.read();
 		ArrayList<ZTreeNode> visited = new ArrayList<>();
-		boolean tick = false;
-		char c = (char) flag;
-		String komp = "", sad = "";
+		//boolean tick = false;
+		//char c = (char) flag;
+		//String komp = "", sad = "";
 			
-		while(flag != -1) {
+		ZTreeNode tmp;
+		while((tmp = (ZTreeNode) in.readObject()) != null) {
+			
+			if(root == null) {
+				root = new ZTreeNode(tmp.getNode());
+				for(ObserverUpdate o : observers)
+					root.addObserver(o);
+				tree.setRoot(root);
+				visited.add(root);
+			}
+			else {				
+				while(visited.contains(root))
+					root = (ZTreeNode) root.getNextNode();
+				visited.add(root);
+				if(root.getNode() instanceof Parametar)
+					root = (ZTreeNode) root.getParent();
+				if(root.getNode().getClass().equals(tmp.getNode().getClass()) && root.getParent() != null)
+					root = (ZTreeNode) root.getParent();
+			}
+			
+			addNode(root, tmp.getNode());
+		}
+		/*while(flag != -1) {
 			if(c == 'ð') {
 				if(root == null) {
 					root = new ZTreeNode(new Proizvod(komp, sad));
@@ -150,7 +178,7 @@ public class ZTreeController implements IZTreeController{
 				
 			flag = in.read();
 			c = (char) flag;
-		}
+		}*/
 			
 			
 		in.close();

@@ -16,7 +16,7 @@ import instafram.tree.view.ZTree;
 
 public class MenuBar extends JMenuBar{
 
-	public MenuBar(ZTree tree) {
+	public MenuBar(ZTree tree, String korsinik) {
 		super();
 
 		JMenu file = new JMenu("File");

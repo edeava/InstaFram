@@ -1,5 +1,6 @@
 package instafram.tree.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observer;
 
@@ -7,9 +8,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import instafram.treeComponent.model.Parametar;
 
-public class ZTreeNode extends DefaultMutableTreeNode implements Observable{
+public class ZTreeNode extends DefaultMutableTreeNode implements Observable, Serializable{
 	
-	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
+	private static final long serialversionUID = 129348938L;
+	private transient ArrayList<ObserverUpdate> observers = new ArrayList<>();
 	private IZTreeNode node;
 	
 	public ZTreeNode(IZTreeNode node) {

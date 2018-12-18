@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
+import instafram.treeComponent.model.Proizvod;
 
 public class SaveTreeAction extends ZTreeAbsAction{
 
@@ -33,7 +34,10 @@ public class SaveTreeAction extends ZTreeAbsAction{
 		}
 		if(selectedNode == null)
 			selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
-	
+		
+		while(!(selectedNode.getNode() instanceof Proizvod))
+			selectedNode = (ZTreeNode) selectedNode.getParent();
+		
 		try {
 			controller.saveTree(selectedNode, file);
 		} catch (IOException e1) {

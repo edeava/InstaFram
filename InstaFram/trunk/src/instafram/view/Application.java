@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -31,12 +34,14 @@ import instafram.tree.model.ZTreeNode;
 import instafram.tree.view.ZTree;
 import instafram.treeComponent.model.Proizvod;
 
-public class Application extends JFrame{
+public class Application extends JFrame implements ClipboardOwner{
 
 	private static Application instance;
 	private ZTree tree;
 	private PanelD workspace;
 	private JScrollPane treeSc;
+	private Clipboard clipboard;
+	private String korisnik;
 	
 	public ZTree getTree() {
 		return tree;
@@ -60,13 +65,19 @@ public class Application extends JFrame{
 		((ZTreeNode) tree.getModel().getRoot()).addObserver(workspace.getDesnoDole());
 		((ZTreeNode) tree.getModel().getRoot()).addObserver(workspace.getTb());
 		
-		MenuBar menu = new MenuBar(tree);
+		LogInFrame login = new LogInFrame();
+		
+		if(login.getKorisnik() != null)
+			korisnik = login.getKorisnik();
+		else System.exit(0);
+		
+		MenuBar menu = new MenuBar(tree, korisnik);
 		this.setJMenuBar(menu);
 		
-		ToolBar toolBar = new ToolBar(tree);
+		ToolBar toolBar = new ToolBar(tree, korisnik);
 		add(toolBar, BorderLayout.NORTH);
 		
-		ToolBar tb = new ToolBar(tree);
+		ToolBar tb = new ToolBar(tree, korisnik);
 		tb.setRemoveAction(workspace.getTb());
 		
 		workspace.add(tb, BorderLayout.NORTH);
@@ -104,5 +115,23 @@ public class Application extends JFrame{
 
 	public JScrollPane getTreeSc() {
 		return treeSc;
+	}
+
+	@Override
+	public void lostOwnership(Clipboard clipboard, Transferable contents) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Clipboard getClipboard() {
+		return clipboard;
+	}
+
+	public String getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(String korisnik) {
+		this.korisnik = korisnik;
 	}
 }

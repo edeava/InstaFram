@@ -20,6 +20,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private SaveTreeAction saveAction;
 	private LoadTreeAction loadAction;
 	private SaveAsTreeAction saveAs;
+	private CopyNodeAction copy;
 		
 	public ZTreeActionManager(IZTreeController controller) {
 		this.addNode = new AddNodeAction(controller);
@@ -28,11 +29,14 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		this.saveAction = new SaveTreeAction(controller);
 		this.loadAction = new LoadTreeAction(controller);
 		this.saveAs = new SaveAsTreeAction(controller);
+		//this.copy = new CopyNodeAction(controller, Application.getInstance().getClipboard());
 	}
 
 	@Override
 	public void valueChanged(TreeSelectionEvent arg0) {
-		TreePath path = arg0.getPath();
+		TreePath[] paths = arg0.getPaths();
+		TreePath path = paths[0];
+		ArrayList<ZTreeNode> selectedNodes = new ArrayList<>();
 		
 		if(path != null) {
 			ZTreeNode selectedNode = (ZTreeNode) path.getPathComponent(path.getPathCount() - 1);
@@ -45,6 +49,13 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.saveAs.setSelectedNode(selectedNode);
 			
 			selectedNode.notifyObserver();
+		}
+		
+		if(paths != null) {
+			for (int i = 0; i < paths.length; i++) 
+				selectedNodes.add((ZTreeNode) paths[i].getPathComponent(path.getPathCount() - 1));
+			
+			//copy.setSelectedNode(selectedNodes);
 		}
 	}
 
