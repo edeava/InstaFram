@@ -82,10 +82,13 @@ public class ZTreeController implements IZTreeController{
 		
 		FileOutputStream fileOut = new FileOutputStream(file);
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
-		Enumeration<ZTreeNode> e = root.preorderEnumeration();
 			
-		dfs(root, out, new ArrayList<>(), e);
+		//dfs(root, out, new ArrayList<>(), e);
+		
+		out.writeUnshared(root);
+		
 		out.close();
+		fileOut.close();
 		changed = true;
 	}
 	
@@ -104,14 +107,15 @@ public class ZTreeController implements IZTreeController{
 		return brListova;
 	}
 
-	public static void dfs(ZTreeNode root, ObjectOutputStream out, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) throws IOException {
+	public static void dfs(ZTreeNode root, ArrayList<ObserverUpdate> observers, ArrayList<ZTreeNode> visited, Enumeration<ZTreeNode> e) {
 		visited.add(root);
-		out.writeObject(root);
+		for(ObserverUpdate o : observers)
+			root.addObserver(o);
 		
 		while(e.hasMoreElements()) {
 			ZTreeNode next = (ZTreeNode) e.nextElement();
 			if(!visited.contains(next))
-				dfs(next, out, visited, next.preorderEnumeration());
+				dfs(next, observers, visited, next.preorderEnumeration());
 		}
 	}
 	
@@ -120,68 +124,24 @@ public class ZTreeController implements IZTreeController{
 
 		FileInputStream fileIn = new FileInputStream(file);
 		ObjectInputStream in = new ObjectInputStream(fileIn);
-		//int flag = in.read();
-		ArrayList<ZTreeNode> visited = new ArrayList<>();
-		//boolean tick = false;
-		//char c = (char) flag;
-		//String komp = "", sad = "";
+		observers.addAll(root.getObservers());
 			
-		ZTreeNode tmp;
-		while((tmp = (ZTreeNode) in.readObject()) != null) {
+		try{
+			ZTreeNode tmp = (ZTreeNode) in.readUnshared();
+			root = tmp;
+			getTree().setRoot(root);
 			
-			if(root == null) {
-				root = new ZTreeNode(tmp.getNode());
-				for(ObserverUpdate o : observers)
-					root.addObserver(o);
-				tree.setRoot(root);
-				visited.add(root);
-			}
-			else {				
-				while(visited.contains(root))
-					root = (ZTreeNode) root.getNextNode();
-				visited.add(root);
-				if(root.getNode() instanceof Parametar)
-					root = (ZTreeNode) root.getParent();
-				if(root.getNode().getClass().equals(tmp.getNode().getClass()) && root.getParent() != null)
-					root = (ZTreeNode) root.getParent();
-			}
+			Enumeration<ZTreeNode> e = root.preorderEnumeration();
+			dfs(root, observers, new ArrayList<ZTreeNode>(), e);
 			
-			addNode(root, tmp.getNode());
+			this.getTree().update();
+			getTree().getModel().reload();
+			
+		}finally {
+			
+			in.close();
+			fileIn.close();
 		}
-		/*while(flag != -1) {
-			if(c == 'ð') {
-				if(root == null) {
-					root = new ZTreeNode(new Proizvod(komp, sad));
-					for(ObserverUpdate o : observers)
-						root.addObserver(o);
-					tree.setRoot(root);
-					visited.add(root);
-				}
-				else { 
-					addNode(root, (IZTreeNode) new Proizvod(komp, sad));
-					while(visited.contains(root))
-						root = (ZTreeNode) root.getNextNode();
-					visited.add(root);
-				}
-				komp = "";
-				sad = "";
-				
-			}else if(c == ')') {
-				root = (ZTreeNode) root.getParent();
-			}else if(c == '{') {
-				tick = true;
-			}else if(c == '}'){
-				tick = false;
-			}else if(!tick){		
-				komp += c;
-			}else sad += c;
-				
-			flag = in.read();
-			c = (char) flag;
-		}*/
-			
-			
-		in.close();
 	}
 
 	@Override

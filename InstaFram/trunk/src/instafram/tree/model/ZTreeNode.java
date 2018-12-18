@@ -19,6 +19,10 @@ public class ZTreeNode extends DefaultMutableTreeNode implements Observable, Ser
 		this.node = node;
 	}
 	
+	public ZTreeNode(ZTreeNode clone) {
+		this.node = clone.node;
+	}
+	
 	public IZTreeNode getNode() {
 		return node;
 	}
@@ -53,6 +57,8 @@ public class ZTreeNode extends DefaultMutableTreeNode implements Observable, Ser
 
 	@Override
 	public void notifyObserver() {
+		if(observers == null)
+			return;
 		for(ObserverUpdate o : observers) {
 			o.onUpdate(this);
 		}
@@ -60,11 +66,17 @@ public class ZTreeNode extends DefaultMutableTreeNode implements Observable, Ser
 
 	@Override
 	public void addObserver(ObserverUpdate o) {
+		if(observers == null)
+			observers = new ArrayList<>();
 		observers.add(o);
 	}
 	
 	public void setName(String name) {
 		this.node.setName(name);
 		notifyObserver();
+	}
+
+	public ArrayList<ObserverUpdate> getObservers() {
+		return observers;
 	}
 }
