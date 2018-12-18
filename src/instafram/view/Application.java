@@ -41,7 +41,7 @@ public class Application extends JFrame implements ClipboardOwner{
 	private PanelD workspace;
 	private JScrollPane treeSc;
 	private Clipboard clipboard;
-	private String korisnik;
+	private String korisnik = "admin";
 	
 	public ZTree getTree() {
 		return tree;
@@ -65,11 +65,11 @@ public class Application extends JFrame implements ClipboardOwner{
 		((ZTreeNode) tree.getModel().getRoot()).addObserver(workspace.getDesnoDole());
 		((ZTreeNode) tree.getModel().getRoot()).addObserver(workspace.getTb());
 		
-		LogInFrame login = new LogInFrame();
+		//LogInFrame login = new LogInFrame();
 		
-		if(login.getKorisnik() != null)
-			korisnik = login.getKorisnik();
-		else System.exit(0);
+		//if(login.getKorisnik() != null)
+			//korisnik = login.getKorisnik();
+		//else System.exit(0);
 		
 		MenuBar menu = new MenuBar(tree, korisnik);
 		this.setJMenuBar(menu);

@@ -52,8 +52,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		}
 		
 		if(paths != null) {
-			for (int i = 0; i < paths.length; i++) 
-				selectedNodes.add((ZTreeNode) paths[i].getPathComponent(path.getPathCount() - 1));
+			//for (int i = 0; i < paths.length; i++) 
+				//selectedNodes.add((ZTreeNode) paths[i].getPathComponent(path.getPathCount() - 1));
 			
 			//copy.setSelectedNode(selectedNodes);
 		}
