@@ -128,12 +128,13 @@ public class ZTreeController implements IZTreeController{
 			
 		try{
 			ZTreeNode tmp = (ZTreeNode) in.readUnshared();
-			root = tmp;
-			getTree().setRoot(root);
+			root = new ZTreeNode(tmp);
 			
 			Enumeration<ZTreeNode> e = root.preorderEnumeration();
 			dfs(root, observers, new ArrayList<ZTreeNode>(), e);
 			
+			getTree().setRoot(root);
+			this.tree.setSelectionPath(new TreePath(root.getPath()));
 			this.getTree().update();
 			getTree().getModel().reload();
 			

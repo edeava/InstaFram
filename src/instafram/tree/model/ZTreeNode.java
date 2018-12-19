@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Observer;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 
 import instafram.treeComponent.model.Parametar;
 
@@ -21,6 +22,10 @@ public class ZTreeNode extends DefaultMutableTreeNode implements Observable, Ser
 	
 	public ZTreeNode(ZTreeNode clone) {
 		this.node = clone.node;
+		int n = clone.getChildCount();
+		for (int i = 0; i < n; i++) {
+			this.insert((MutableTreeNode) clone.getChildAt(0), i);
+		}
 	}
 	
 	public IZTreeNode getNode() {
