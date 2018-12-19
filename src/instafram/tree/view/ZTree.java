@@ -1,5 +1,7 @@
 package instafram.tree.view;
 
+import java.awt.datatransfer.Clipboard;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
@@ -23,11 +25,11 @@ public class ZTree extends JTree{
 	private ZTreeActionManager actionManager;
 	private ZTreeNode root;
 	
-	public ZTree(IZTreeController controller) {
+	public ZTree(IZTreeController controller, ZTreeActionManager actionManager) {
 		root = new ZTreeNode(new Proizvod("Kompanija"));
 		this.controller = controller;
 		this.controller.setTree(this);
-		this.actionManager = new ZTreeActionManager(controller);
+		this.actionManager = actionManager;
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 		
 		
@@ -58,6 +60,10 @@ public class ZTree extends JTree{
 
 	public ZTreeActionManager getActionManager() {
 		return actionManager;
+	}
+
+	public void setActionManager(ZTreeActionManager actionManager) {
+		this.actionManager = actionManager;
 	}
 
 	public void setRoot(ZTreeNode root) {

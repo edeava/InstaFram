@@ -1,5 +1,6 @@
 package instafram.tree.actions;
 
+import java.awt.datatransfer.Clipboard;
 import java.util.ArrayList;
 
 import javax.swing.event.TreeSelectionEvent;
@@ -21,15 +22,16 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private LoadTreeAction loadAction;
 	private SaveAsTreeAction saveAs;
 	private CopyNodeAction copy;
+	private ZTreeNode prevSelected;
 		
-	public ZTreeActionManager(IZTreeController controller) {
+	public ZTreeActionManager(IZTreeController controller, Clipboard clipboard) {
 		this.addNode = new AddNodeAction(controller);
 		this.removeNode = new RemoveNodeAction(controller);
 		this.editNode = new EditNodeAction(controller);
 		this.saveAction = new SaveTreeAction(controller);
 		this.loadAction = new LoadTreeAction(controller);
 		this.saveAs = new SaveAsTreeAction(controller);
-		//this.copy = new CopyNodeAction(controller, Application.getInstance().getClipboard());
+		this.copy = new CopyNodeAction(controller, clipboard);
 	}
 
 	@Override
@@ -52,10 +54,14 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		}
 		
 		if(paths != null) {
-			//for (int i = 0; i < paths.length; i++) 
-				//selectedNodes.add((ZTreeNode) paths[i].getPathComponent(path.getPathCount() - 1));
-			
-			//copy.setSelectedNode(selectedNodes);
+			int n = paths.length;
+			if(prevSelected != null)
+				selectedNodes.add(0, prevSelected);
+			for (int i = 0; i < n; i++) 
+				selectedNodes.add((ZTreeNode) paths[i].getPathComponent(paths[i].getPathCount() - 1));
+			if(n == 1)
+				prevSelected = selectedNodes.get(0);
+			copy.setSelectedNode(selectedNodes);
 		}
 	}
 
