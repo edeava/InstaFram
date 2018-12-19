@@ -58,7 +58,9 @@ public class Application extends JFrame implements ClipboardOwner{
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("Img/camera.png").getImage());
 		workspace = new PanelD(new BorderLayout());
-		tree = new ZTree( new ZTreeController());
+		clipboard = new Clipboard("clipboard");
+		ZTreeController controller = new ZTreeController();
+		tree = new ZTree(controller, new ZTreeActionManager(controller, clipboard));
 		tree.getController().addObservers(workspace.getDesnoDole());
 		tree.getController().addObservers(workspace.getTb());
 
