@@ -32,8 +32,8 @@ public class SaveTreeAction extends ZTreeAbsAction{
 			}
 			
 		}
-		if(selectedNode == null)
-			selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
+		
+		selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
 		
 		while(!(selectedNode.getNode() instanceof Proizvod))
 			selectedNode = (ZTreeNode) selectedNode.getParent();
