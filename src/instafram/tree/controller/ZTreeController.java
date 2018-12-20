@@ -42,8 +42,10 @@ public class ZTreeController implements IZTreeController{
 	@Override
 	public void addNode(ZTreeNode parent, IZTreeNode node) {
 		ZTreeNode newChild = new ZTreeNode(node);
+		
 		for(ObserverUpdate o : observers)
-			newChild.addObserver(o);
+			if(!newChild.getObservers().contains(o))
+				newChild.addObserver(o);
 		
 		tree.getModel().insertNodeInto(newChild, parent, parent.getChildCount());
 		parent.addNode(node);
@@ -56,14 +58,14 @@ public class ZTreeController implements IZTreeController{
 	}
 
 	@Override
-	public void removeNode(ZTreeNode node) {
+	public void removeNode(ZTreeNode node, boolean msg) {
 		ZTreeNode parent = (ZTreeNode) node.getParent();
 		
 		int brL = 0;
 		Enumeration<ZTreeNode> e = node.preorderEnumeration();
 		brL = dfs(node, new ArrayList<>(), e, brL);
 		
-		if(Application.option("Brisete cvor sa " + brL + " listova, i " +
+		if(!msg || Application.option("Brisete cvor sa " + brL + " listova, i " +
 				node.getChildCount() + " deteta.\nDa li ste sugurni?", "Paznja") == JOptionPane.YES_OPTION) {
 		
 			//parent.removeNode(node.getNode());

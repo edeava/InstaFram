@@ -12,9 +12,9 @@ import javax.lang.model.util.ElementFilter;
 
 public class TreeElementSelection implements Transferable, ClipboardOwner{
 
-	private DataFlavor flavor;
+	static public DataFlavor flavor;
 	private DataFlavor[] supportedFlavors = new DataFlavor[100];
-	private ArrayList<ZTreeNode> treeElements = new ArrayList<>();
+	public ArrayList<ZTreeNode> treeElements = new ArrayList<>();
 	
 	public TreeElementSelection(ArrayList<ZTreeNode> treeElements) {
 		super();

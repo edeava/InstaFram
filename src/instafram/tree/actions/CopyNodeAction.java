@@ -11,7 +11,7 @@ import instafram.view.Application;
 
 public class CopyNodeAction extends ZTreeAbsAction{
 
-	private ArrayList<ZTreeNode> selectedNodes = new ArrayList<>();
+	protected ArrayList<ZTreeNode> selectedNodes = new ArrayList<>();
 	private Clipboard clipboard;
 	
 	public CopyNodeAction(IZTreeController controller, Clipboard clipboard) {

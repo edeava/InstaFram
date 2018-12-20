@@ -30,12 +30,15 @@ public class MenuBar extends JMenuBar{
 		JMenuItem mOpen = new JMenuItem("mOpen");
 		mOpen.setIcon(new ImageIcon("Img/open.jpg"));
 		mOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.VK_ALT));
+		mOpen.addActionListener(tree.getActionManager().getLoadAction());
 		JMenuItem mClose = new JMenuItem("mClose");
 		mClose.setIcon(new ImageIcon("Img/close.png"));
-		mClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.VK_ALT));
+		mClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, KeyEvent.VK_ALT));
 		JMenuItem mSwitch = new JMenuItem("mSwitch");
 		mSwitch.setIcon(new ImageIcon("Img/switch.png"));
 		mSwitch.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.VK_ALT));
+		
+		
 		
 		JMenuItem mSave = new JMenuItem("mSave");
 		mSave.setIcon(new ImageIcon("Img/save.png"));
@@ -63,7 +66,6 @@ public class MenuBar extends JMenuBar{
 		mExport.setIcon(new ImageIcon("Img/export.png"));
 		
 		JMenuItem mImport = new JMenuItem("mImport");
-		mImport.addActionListener(tree.getActionManager().getLoadAction());
 		mImport.setIcon(new ImageIcon("Img/import.png"));
 		
 		JMenuItem mExit = new JMenuItem("mExit");
