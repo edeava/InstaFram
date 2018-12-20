@@ -10,6 +10,7 @@ import javax.swing.tree.TreePath;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
+import instafram.treeComponent.model.Parametar;
 import instafram.treeComponent.model.Proizvod;
 import instafram.view.Application;
 import instafram.view.TabbedPane;
@@ -22,6 +23,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private LoadTreeAction loadAction;
 	private SaveAsTreeAction saveAs;
 	private CopyNodeAction copy;
+	private PasteNodeAction paste;
+	private CutNodeAction cut;
 	private ZTreeNode prevSelected;
 		
 	public ZTreeActionManager(IZTreeController controller, Clipboard clipboard) {
@@ -32,6 +35,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		this.loadAction = new LoadTreeAction(controller);
 		this.saveAs = new SaveAsTreeAction(controller);
 		this.copy = new CopyNodeAction(controller, clipboard);
+		this.paste = new PasteNodeAction(controller, clipboard);
+		this.cut = new CutNodeAction(controller, clipboard);
 	}
 
 	@Override
@@ -49,19 +54,21 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.saveAction.setSelectedNode(selectedNode);
 			this.loadAction.setSelectedNode(selectedNode);
 			this.saveAs.setSelectedNode(selectedNode);
+			this.paste.setSelectedNode(selectedNode);
 			
 			selectedNode.notifyObserver();
 		}
 		
 		if(paths != null) {
 			int n = paths.length;
-			if(prevSelected != null)
+			if(prevSelected != null && prevSelected.getNode() instanceof Parametar)
 				selectedNodes.add(0, prevSelected);
 			for (int i = 0; i < n; i++) 
 				selectedNodes.add((ZTreeNode) paths[i].getPathComponent(paths[i].getPathCount() - 1));
 			if(n == 1)
-				prevSelected = selectedNodes.get(0);
+				prevSelected = selectedNodes.get(selectedNodes.size() - 1);
 			copy.setSelectedNode(selectedNodes);
+			cut.setSelectedNode(selectedNodes);
 		}
 	}
 
@@ -90,5 +97,17 @@ public class ZTreeActionManager implements TreeSelectionListener{
 
 	public SaveAsTreeAction getSaveAs() {
 		return saveAs;
+	}
+
+	public CopyNodeAction getCopy() {
+		return copy;
+	}
+
+	public PasteNodeAction getPaste() {
+		return paste;
+	}
+
+	public CutNodeAction getCut() {
+		return cut;
 	}
 }

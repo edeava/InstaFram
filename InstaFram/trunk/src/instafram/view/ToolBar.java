@@ -1,12 +1,20 @@
 package instafram.view;
 
+import java.awt.Event;
+import java.awt.datatransfer.Clipboard;
+import java.awt.event.KeyEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import instafram.actions.RemoveTab;
 import instafram.tree.actions.AddNodeAction;
+import instafram.tree.actions.CopyNodeAction;
+import instafram.tree.actions.PasteNodeAction;
 import instafram.tree.view.ZTree;
 
 public class ToolBar extends JToolBar{
@@ -32,6 +40,7 @@ public class ToolBar extends JToolBar{
 		btnOpen = new JButton();
 		btnOpen.setToolTipText("Open");
 		btnOpen.setIcon(new ImageIcon("Img/open.jpg"));
+		btnOpen.addActionListener(tree.getActionManager().getLoadAction());
 		add(btnOpen);
 		
 		btnClose = new JButton();
@@ -53,12 +62,16 @@ public class ToolBar extends JToolBar{
 		btnCopy.setToolTipText("Copy Nodes");
 		btnCopy.setIcon(new ImageIcon("Img/copy.png"));
 		add(btnCopy);
+		btnCopy.addActionListener(tree.getActionManager().getCopy());
+		KeyStroke keyStroke = KeyStroke.getKeyStroke('C', Event.CTRL_MASK, false);
+	    btnCopy.registerKeyboardAction(null, keyStroke, JComponent.WHEN_FOCUSED);
 		if(korisnik.equals("konfigurator"))
 			btnCopy.setEnabled(false);
 		
 		JButton btnCut = new JButton();
 		btnCut.setToolTipText("Cut Nodes");
 		btnCut.setIcon(new ImageIcon("Img/cut.png"));
+		btnCut.addActionListener(tree.getActionManager().getCut());
 		add(btnCut);
 		if(korisnik.equals("konfigurator"))
 			btnCut.setEnabled(false);
@@ -66,6 +79,7 @@ public class ToolBar extends JToolBar{
 		JButton btnPaste = new JButton();
 		btnPaste.setToolTipText("Paste Nodes");
 		btnPaste.setIcon(new ImageIcon("Img/paste.png"));
+		btnPaste.addActionListener(tree.getActionManager().getPaste());
 		add(btnPaste);
 		if(korisnik.equals("konfigurator"))
 			btnPaste.setEnabled(false);

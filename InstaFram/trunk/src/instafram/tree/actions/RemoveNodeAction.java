@@ -20,7 +20,7 @@ public class RemoveNodeAction extends ZTreeAbsAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(selectedNode != null && selectedNode.getParent() != null)
-			this.controller.removeNode(selectedNode);
+			this.controller.removeNode(selectedNode, true);
 		else JOptionPane.showMessageDialog(Application.getInstance(), "Nevalidno brisanje");
 		
 	}	
