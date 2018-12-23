@@ -43,7 +43,6 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	public void valueChanged(TreeSelectionEvent arg0) {
 		TreePath[] paths = arg0.getPaths();
 		TreePath path = paths[0];
-		ArrayList<ZTreeNode> selectedNodes = new ArrayList<>();
 		
 		if(path != null) {
 			ZTreeNode selectedNode = (ZTreeNode) path.getPathComponent(path.getPathCount() - 1);
@@ -57,18 +56,6 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.paste.setSelectedNode(selectedNode);
 			
 			selectedNode.notifyObserver();
-		}
-		
-		if(paths != null) {
-			int n = paths.length;
-			if(prevSelected != null && prevSelected.getNode() instanceof Parametar)
-				selectedNodes.add(0, prevSelected);
-			for (int i = 0; i < n; i++) 
-				selectedNodes.add((ZTreeNode) paths[i].getPathComponent(paths[i].getPathCount() - 1));
-			if(n == 1)
-				prevSelected = selectedNodes.get(selectedNodes.size() - 1);
-			copy.setSelectedNode(selectedNodes);
-			cut.setSelectedNode(selectedNodes);
 		}
 	}
 
