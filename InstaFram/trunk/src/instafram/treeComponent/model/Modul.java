@@ -13,6 +13,10 @@ public class Modul implements IZTreeNode{
 		this.name = name;
 	}
 
+	public Modul(Modul modul) {
+		this.name = modul.getName();
+	}
+	
 	@Override
 	public void addNode(IZTreeNode node) {
 		// TODO Auto-generated method stub

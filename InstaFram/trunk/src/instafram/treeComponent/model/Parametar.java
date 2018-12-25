@@ -15,6 +15,12 @@ public class Parametar implements IZTreeNode{
 		this.name = name;
 	}
 
+	public Parametar(Parametar parametar) {
+		this.name = parametar.getName();
+		this.gui = parametar.getGui();
+		this.vrednost = parametar.getVrednost();
+	}
+	
 	public Parametar(String name, PredefinedParameter gui) {
 		super();
 		this.name = name;
@@ -71,5 +77,9 @@ public class Parametar implements IZTreeNode{
 
 	public String getVrednost() {
 		return vrednost;
+	}
+
+	public void setVrednost(String vrednost) {
+		this.vrednost = vrednost;
 	}
 }

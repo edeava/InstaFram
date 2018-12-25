@@ -29,8 +29,8 @@ public class CopyNodeAction extends ZTreeAbsAction{
 		selectedNodes.clear();
 		TreePath[] paths = controller.getTree().getSelectionPaths();
 		int n = paths.length;
-		for (int i = 0; i < n; i++) {
-			ZTreeNode node = (ZTreeNode) paths[i].getPathComponent(paths[i].getPathCount() - 1);
+		for (TreePath p : paths) {
+			ZTreeNode node = new ZTreeNode((ZTreeNode) p.getPathComponent(p.getPathCount() - 1));
 			if(node.getNode() instanceof Parametar)
 				selectedNodes.add(node);
 		}
@@ -39,8 +39,8 @@ public class CopyNodeAction extends ZTreeAbsAction{
 		clipboard.setContents(selection, Application.getInstance());
 	}
 
-	public void setSelectedNode(ArrayList<ZTreeNode> selectedNodes) {
+	/*public void setSelectedNode(ArrayList<ZTreeNode> selectedNodes) {
 		this.selectedNodes = selectedNodes;
-	}
+	}*/
 
 }

@@ -36,8 +36,8 @@ public class TabbedPane extends JTabbedPane implements ObserverUpdate{
 			JPanel p = new JPanel();
 			if(node.getNode() instanceof Parametar)
 				p.add(GuiBuilder.build(((Parametar) node.getNode()).getGui(), (Parametar) node.getNode()));
-			else if(node.getNode() instanceof Modul) 
-				p.add(GuiBuilder.browse(Box.createVerticalBox(), false, "Odaberite putanju"));
+			//else if(node.getNode() instanceof Modul) 
+				//p.add(GuiBuilder.browse(Box.createVerticalBox(), false, "Odaberite putanju"));
 			
 			//JScrollPane sp = new JScrollPane(null, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			super.addTab(node.toString(), p);
