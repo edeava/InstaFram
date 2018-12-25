@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Modul;
@@ -17,9 +18,10 @@ import instafram.view.Application;
 public class AddNodeAction extends ZTreeAbsAction{
 
 	public static int i = 1;
-	
-	public AddNodeAction(IZTreeController controller) {
-		super(controller);
+
+	public AddNodeAction(IZTreeController controller, CommandManager manager) {
+		super(controller, manager);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

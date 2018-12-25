@@ -7,14 +7,16 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
 
 public class SaveAsTreeAction extends ZTreeAbsAction{
 
-	public SaveAsTreeAction(IZTreeController controller) {
-		super(controller);
+
+	public SaveAsTreeAction(IZTreeController controller, CommandManager manager) {
+		super(controller, manager);
 		// TODO Auto-generated constructor stub
 	}
 

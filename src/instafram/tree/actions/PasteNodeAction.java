@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.TreeElementSelection;
 import instafram.tree.model.ZTreeNode;
@@ -18,11 +19,12 @@ import instafram.view.Application;
 public class PasteNodeAction extends ZTreeAbsAction{
 
 	private Clipboard clipboard;
-	
-	public PasteNodeAction(IZTreeController controller, Clipboard clipboard) {
-		super(controller);
+
+	public PasteNodeAction(IZTreeController controller, CommandManager manager, Clipboard clipboard) {
+		super(controller, manager);
 		this.clipboard = clipboard;
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

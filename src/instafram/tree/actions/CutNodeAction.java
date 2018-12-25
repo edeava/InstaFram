@@ -4,14 +4,15 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.event.ActionEvent;
 import java.util.Iterator;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Parametar;
 
-public class CutNodeAction extends CopyNodeAction{
+public class CutNodeAction extends CopyNodeAction {
 
-	public CutNodeAction(IZTreeController controller, Clipboard clipboard) {
-		super(controller, clipboard);
+	public CutNodeAction(IZTreeController controller, CommandManager manager, Clipboard clipboard) {
+		super(controller, manager, clipboard);
 		// TODO Auto-generated constructor stub
 	}
 

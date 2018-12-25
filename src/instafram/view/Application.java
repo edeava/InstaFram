@@ -28,6 +28,7 @@ import javax.swing.border.Border;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import instafram.actions.FrameCloseListener;
+import instafram.command.CommandManager;
 import instafram.tree.actions.ZTreeActionManager;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ZTreeNode;
@@ -60,7 +61,7 @@ public class Application extends JFrame implements ClipboardOwner{
 		workspace = new PanelD(new BorderLayout());
 		clipboard = new Clipboard("clipboard");
 		ZTreeController controller = new ZTreeController();
-		tree = new ZTree(controller, new ZTreeActionManager(controller, clipboard));
+		tree = new ZTree(controller, new ZTreeActionManager(controller, clipboard, new CommandManager()));
 		tree.getController().addObservers(workspace.getDesnoDole());
 		tree.getController().addObservers(workspace.getTb());
 
