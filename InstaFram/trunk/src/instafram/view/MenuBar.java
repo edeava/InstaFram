@@ -93,6 +93,42 @@ public class MenuBar extends JMenuBar{
 		view.setMnemonic(KeyEvent.VK_V);
 		JMenu tools = new JMenu("Tools");
 		tools.setMnemonic(KeyEvent.VK_T);
+		
+		JMenuItem mCopy = new JMenuItem("Copy");
+		mCopy.setIcon(new ImageIcon("Img/copy.png"));
+		mCopy.setAccelerator(KeyStroke.getKeyStroke((char) KeyEvent.VK_COPY));
+		mCopy.addActionListener(tree.getActionManager().getCopy());
+		
+		JMenuItem mCut = new JMenuItem("Cut");
+		mCut.setIcon(new ImageIcon("Img/cut.png"));
+		mCut.setAccelerator(KeyStroke.getKeyStroke((char) KeyEvent.VK_CUT));
+		mCut.addActionListener(tree.getActionManager().getCut());
+		
+		JMenuItem mPaste = new JMenuItem("Paste");
+		mPaste.setIcon(new ImageIcon("Img/paste.png"));
+		mPaste.setAccelerator(KeyStroke.getKeyStroke((char) KeyEvent.VK_PASTE));
+		mPaste.addActionListener(tree.getActionManager().getPaste());
+		
+		JMenuItem mUndo = new JMenuItem("Undo");
+		mUndo.setIcon(new ImageIcon("Img/undo.png"));
+		mUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.VK_ALT));
+		mUndo.addActionListener(tree.getActionManager().getUndo());
+		
+		JMenuItem mRedo = new JMenuItem("Redo");
+		mRedo.setIcon(new ImageIcon("Img/redo.png"));
+		mRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.VK_CONTROL));
+		mRedo.addActionListener(tree.getActionManager().getRedo());
+		
+		tools.add(mUndo);
+		tools.add(mRedo);
+		
+		tools.addSeparator();
+		
+		tools.add(mCopy);
+		tools.add(mCut);
+		tools.add(mPaste);
+		
+		
 		JMenu parametrizacija = new JMenu("Parametrizacija");
 		JMenu pomoc = new JMenu("Pomoc");
 		JMenu about = new JMenu("About");

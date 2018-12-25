@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import instafram.command.CommandManager;
+import instafram.command.PasteNodesCommand;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.TreeElementSelection;
 import instafram.tree.model.ZTreeNode;
@@ -41,12 +42,14 @@ public class PasteNodeAction extends ZTreeAbsAction{
 			tmpElements = (ArrayList<ZTreeNode>) selected.getTransferData(TreeElementSelection.flavor);
 			int n = tmpElements.size();
 			
-			for (int i = 0; i < n; i++) {
+			manager.addCommand(new PasteNodesCommand(controller, tmpElements, selectedNode));
+			manager.doCommand();
+			/*for (int i = 0; i < n; i++) {
 				if(tmpElements.get(i).getNode() instanceof Parametar) {
 					ZTreeNode tmpNode = new ZTreeNode(tmpElements.get(i));
 					controller.addNode(selectedNode, tmpNode.getNode());
 				}
-			}
+			}*/
 		} catch (UnsupportedFlavorException | IOException e) {
 			
 		} catch (ClassNotFoundException e) {

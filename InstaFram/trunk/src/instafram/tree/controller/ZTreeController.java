@@ -55,6 +55,15 @@ public class ZTreeController implements IZTreeController{
 		parent.addNode(node);
 		changed = true;
 	}
+	
+	public void addCmdNode(ZTreeNode parent, ZTreeNode node) {
+		for(ObserverUpdate o : observers)
+			if(!node.getObservers().contains(o))
+				node.addObserver(o);
+		
+		tree.getModel().insertNodeInto(node, parent, parent.getChildCount());
+		changed = true;
+	}
 
 	@Override
 	public void editNode(ZTreeNode node) {

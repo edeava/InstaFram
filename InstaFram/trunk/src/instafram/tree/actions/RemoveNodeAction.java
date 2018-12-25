@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 
 import instafram.command.CommandManager;
+import instafram.command.RemoveNodeCommand;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.view.Application;
@@ -21,9 +22,11 @@ public class RemoveNodeAction extends ZTreeAbsAction{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(selectedNode != null && selectedNode.getParent() != null)
-			this.controller.removeNode(selectedNode, true);
-		else JOptionPane.showMessageDialog(Application.getInstance(), "Nevalidno brisanje");
+		if(selectedNode != null && selectedNode.getParent() != null) {
+			//this.controller.removeNode(selectedNode, true);
+			manager.addCommand(new RemoveNodeCommand(controller, (ZTreeNode) selectedNode.getParent(), selectedNode));
+			manager.doCommand();
+		}else JOptionPane.showMessageDialog(Application.getInstance(), "Nevalidno brisanje");
 		
 	}	
 }
