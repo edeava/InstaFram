@@ -34,7 +34,7 @@ public class ToolBar extends JToolBar{
 		btnNew.addActionListener(tree.getActionManager().getAddNode());
 		btnNew.setIcon(new ImageIcon("Img/new.png"));
 		add(btnNew);
-		if(korisnik.equals("konfigurator"))
+		if(korisnik.equals("student"))
 			btnNew.setEnabled(false);
 		
 		btnOpen = new JButton();
@@ -48,7 +48,7 @@ public class ToolBar extends JToolBar{
 		btnClose.addActionListener(tree.getActionManager().getRemoveNode());
 		btnClose.setIcon(new ImageIcon("Img/close.png"));
 		add(btnClose);
-		if(korisnik.equals("konfigurator"))
+		if(korisnik.equals("student"))
 			btnClose.setEnabled(false);
 		
 		btnSwitch = new JButton();
@@ -63,7 +63,7 @@ public class ToolBar extends JToolBar{
 		btnCopy.setIcon(new ImageIcon("Img/copy.png"));
 		add(btnCopy);
 		btnCopy.addActionListener(tree.getActionManager().getCopy());
-		if(korisnik.equals("konfigurator"))
+		if(korisnik.equals("student"))
 			btnCopy.setEnabled(false);
 		
 		JButton btnCut = new JButton();
@@ -71,7 +71,7 @@ public class ToolBar extends JToolBar{
 		btnCut.setIcon(new ImageIcon("Img/cut.png"));
 		btnCut.addActionListener(tree.getActionManager().getCut());
 		add(btnCut);
-		if(korisnik.equals("konfigurator"))
+		if(korisnik.equals("student"))
 			btnCut.setEnabled(false);
 		
 		JButton btnPaste = new JButton();
@@ -79,14 +79,17 @@ public class ToolBar extends JToolBar{
 		btnPaste.setIcon(new ImageIcon("Img/paste.png"));
 		btnPaste.addActionListener(tree.getActionManager().getPaste());
 		add(btnPaste);
-		if(korisnik.equals("konfigurator"))
+		if(korisnik.equals("student"))
 			btnPaste.setEnabled(false);
 		
 		addSeparator();
 		
 		btnSave = new JButton();
 		btnSave.setToolTipText("Save");
-		btnSave.addActionListener(tree.getActionManager().getSaveAction());
+		if(korisnik.equals("admin"))
+			btnSave.addActionListener(tree.getActionManager().getSaveAction());
+		else if(korisnik.equals("student"))
+			btnSave.addActionListener(tree.getActionManager().getExport());
 		btnSave.setIcon(new ImageIcon("Img/save.png"));
 		add(btnSave);
 		

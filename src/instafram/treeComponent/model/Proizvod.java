@@ -13,14 +13,13 @@ public class Proizvod implements IZTreeNode{
 
 	private String name;
 	
-	public Proizvod(String name, String sadrzaj) {
+	public Proizvod(String name) {
 		super();
 		this.name = name;
 	}
 
-
-	public Proizvod(String name) {
-		this.name = name;
+	public Proizvod(Proizvod proizvod) {
+		this.name = proizvod.getName();
 	}
 
 

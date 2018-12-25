@@ -143,7 +143,7 @@ public class ZTreeController implements IZTreeController{
 			
 		try{
 			ZTreeNode tmp = (ZTreeNode) in.readUnshared();
-			root = new ZTreeNode(tmp);
+			root = tmp;
 			
 			Enumeration<ZTreeNode> e = root.preorderEnumeration();
 			dfs(root, observers, new ArrayList<ZTreeNode>(), e);

@@ -7,6 +7,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
+import instafram.actions.ExportAction;
 import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ObserverUpdate;
@@ -28,6 +29,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private CutNodeAction cut;
 	private UndoAction undo;
 	private RedoAction redo;
+	private ExportAction export;
 		
 	public ZTreeActionManager(IZTreeController controller, Clipboard clipboard, CommandManager manager) {
 		this.addNode = new AddNodeAction(controller, manager);
@@ -41,6 +43,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		this.cut = new CutNodeAction(controller, manager, clipboard);
 		this.undo = new UndoAction(controller, manager);
 		this.redo = new RedoAction(controller, manager);
+		this.export = new ExportAction(controller, manager);
 	}
 
 	@Override
@@ -58,6 +61,7 @@ public class ZTreeActionManager implements TreeSelectionListener{
 			this.loadAction.setSelectedNode(selectedNode);
 			this.saveAs.setSelectedNode(selectedNode);
 			this.paste.setSelectedNode(selectedNode);
+			this.export.setSelectedNode(selectedNode);
 			
 			selectedNode.notifyObserver();
 		}
@@ -108,5 +112,9 @@ public class ZTreeActionManager implements TreeSelectionListener{
 
 	public RedoAction getRedo() {
 		return redo;
+	}
+
+	public ExportAction getExport() {
+		return export;
 	}
 }

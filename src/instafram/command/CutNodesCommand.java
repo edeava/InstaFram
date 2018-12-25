@@ -21,7 +21,7 @@ public class CutNodesCommand extends AbsCommand{
 	@Override
 	public void doCommand() {
 		for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
-			ZTreeNode zTreeNode = (ZTreeNode) iterator.next();
+			ZTreeNode zTreeNode = new ZTreeNode((ZTreeNode) iterator.next());
 			if(zTreeNode.getNode() instanceof Parametar) {
 				if(zTreeNode.getParent() == null)
 					zTreeNode.setParent(selectedNode);

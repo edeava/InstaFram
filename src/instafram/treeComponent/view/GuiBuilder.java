@@ -3,6 +3,8 @@ package instafram.treeComponent.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 
 import javax.swing.Box;
@@ -23,17 +25,38 @@ import instafram.treeComponent.model.PredefinedParameter;
 
 public class GuiBuilder {
 
-	private Parametar parametar;
-	public GuiBuilder(Parametar parametar) {
-		this.parametar = parametar;
-	}
+	private static Parametar parametar;
 
 	public static Component build(PredefinedParameter gui, Parametar parametar) {
 		Box box = Box.createVerticalBox();
+		GuiBuilder.parametar = parametar;
 		if(gui == PredefinedParameter.NAME || gui == PredefinedParameter.AUTHOR) {
 			JTextField tf = new JTextField(7);
 			box.add(new JLabel(gui.toString()));
 			box.add(tf);
+			if(gui == PredefinedParameter.AUTHOR)
+				tf.addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyTyped(KeyEvent e) {
+						parametar.setVrednost(parametar.getVrednost() + "|" + tf.getText());
+						
+					}
+					
+					@Override
+					public void keyReleased(KeyEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent e) {
+						parametar.setVrednost(parametar.getVrednost() + "|" + tf.getText());
+					}
+				});
+		}
+		else if(gui == PredefinedParameter.PATH) {
+			browse(box, false, "Odaberite putanju");
 		}
 		else if(gui == PredefinedParameter.LOGO) {
 			browse(box, true, "Odaberite logo");
@@ -64,6 +87,30 @@ public class GuiBuilder {
 			JCheckBox cb3 = new JCheckBox("Linux");
 			box.add(cb3);
 			bg.add(cb3);
+			
+			cb1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					parametar.setVrednost(parametar.getVrednost() + "|1");
+				}
+			});
+			
+			cb2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					parametar.setVrednost(parametar.getVrednost() + "|2");
+				}
+			});
+			
+			cb3.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					parametar.setVrednost(parametar.getVrednost() + "|3");
+				}
+			});
 		}
 		else if(gui == PredefinedParameter.DESKTOP_SHORTCUT) {
 			JCheckBox cb = new JCheckBox("Da li zelite desktop precicu?");
@@ -126,6 +173,7 @@ public class GuiBuilder {
 				int approved = chooser.showOpenDialog(null);
 				if(approved == JFileChooser.APPROVE_OPTION) {
 					File file = chooser.getSelectedFile();
+					parametar.setVrednost(parametar.getVrednost() + "/" + file.getAbsolutePath());
 					tf.setText(file.toString());
 					if(isPic) {
 						box.remove(2);

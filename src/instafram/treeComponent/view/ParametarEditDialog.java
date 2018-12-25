@@ -39,11 +39,11 @@ public class ParametarEditDialog extends JDialog{
 		JComboBox<PredefinedParameter> cbP = new JComboBox<>(PredefinedParameter.values());
 		JComboBox<PredefinedParameter> cbC = new JComboBox<>();
 		
-		while(cbP.getItemAt(0) != PredefinedParameter.NAME) {
+		while(cbP.getItemAt(0) != PredefinedParameter.PATH) {
 			cbC.addItem(cbP.getItemAt(0));
 			cbP.removeItemAt(0);
 		}
-		cbC.removeItem(PredefinedParameter.PATH);
+		//cbC.removeItem(PredefinedParameter.PATH);
 		
 		cb.addItem("Predefinisani");
 		cb.addItem("Custom");
