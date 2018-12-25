@@ -22,6 +22,7 @@ public class ParametarEditDialog extends JDialog{
 	private int okClick = 0;
 	private PredefinedParameter gui;
 	private String nodeName;
+	private String vrednost;
 	
 	public ParametarEditDialog() {
 		Box box = Box.createVerticalBox();
@@ -48,6 +49,7 @@ public class ParametarEditDialog extends JDialog{
 		cb.addItem("Custom");
 		JButton btnOk = new JButton("Ok");
 		JTextField tf = new JTextField(10);
+		JTextField tf1 = new JTextField(10);
 			
 		panel1.add(lbl);
 		panel1.add(cb);
@@ -76,12 +78,17 @@ public class ParametarEditDialog extends JDialog{
 				}else {
 					if(okClick == 1) {
 						lbl.setText("Name");
+						JLabel lb = new JLabel("Label");
+						JPanel panel4 = new JPanel();
+						panel4.add(lb);
+						panel4.add(tf1);
 						panel1.removeAll();
 						panel1.add(lbl);
 						panel1.add(tf);
 						box.remove(panel2);
 						JPanel panel3 = new JPanel();
 						panel3.add(cbC);
+						box.add(panel4);
 						box.add(panel3);
 						box.add(panel2);
 						pack();
@@ -90,6 +97,7 @@ public class ParametarEditDialog extends JDialog{
 					else if(okClick == 2) {
 						gui = (PredefinedParameter) cbC.getSelectedItem();
 						nodeName = tf.getText();
+						vrednost = tf1.getText();
 						setVisible(false);
 						dispose();
 					}
@@ -104,10 +112,12 @@ public class ParametarEditDialog extends JDialog{
 	}
 
 	public Parametar createParametar(String name) {
-		if(this.nodeName == null)
+		if(this.nodeName == null) {
 			nodeName = name;
+		}
+		
 		if(getGui() != null)
-			return new Parametar(nodeName, getGui());
+			return new Parametar(nodeName, getGui(), vrednost);
 		return null;
 	}
 	

@@ -18,12 +18,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import instafram.treeComponent.model.Parametar;
 import instafram.treeComponent.model.PredefinedParameter;
 
 public class GuiBuilder {
 
-	
-	public static Component build(PredefinedParameter gui) {
+	private Parametar parametar;
+	public GuiBuilder(Parametar parametar) {
+		this.parametar = parametar;
+	}
+
+	public static Component build(PredefinedParameter gui, Parametar parametar) {
 		Box box = Box.createVerticalBox();
 		if(gui == PredefinedParameter.NAME || gui == PredefinedParameter.AUTHOR) {
 			JTextField tf = new JTextField(7);
@@ -70,10 +75,9 @@ public class GuiBuilder {
 		}
 		else {
 			Box b1 = Box.createHorizontalBox();
-			JLabel lb = new JLabel("Label");
-			JTextField tf = new JTextField(10);
+			
+			JLabel lb = new JLabel(parametar.getVrednost());
 			b1.add(lb);
-			b1.add(tf);
 			box.add(b1);
 			
 			if(gui == PredefinedParameter.TEXT) {
@@ -105,9 +109,6 @@ public class GuiBuilder {
 			}
 			else if(gui == PredefinedParameter.CHOOSER) {
 				browse(box, false, "");
-			}
-			else if(gui == PredefinedParameter.IMAGE) {
-				browse(box, true, "");
 			}
 		}
 		return box;
