@@ -8,7 +8,7 @@ public class Parametar implements IZTreeNode{
 
 	private String name;
 	private PredefinedParameter gui;
-	private String vrednost;
+	private String vrednost = "";
 	
 	public Parametar(String name) {
 		super();
@@ -19,6 +19,13 @@ public class Parametar implements IZTreeNode{
 		super();
 		this.name = name;
 		this.gui = gui;
+	}
+
+	public Parametar(String name, PredefinedParameter gui, String vrednost) {
+		super();
+		this.name = name;
+		this.gui = gui;
+		this.vrednost = vrednost;
 	}
 
 	@Override
@@ -60,5 +67,9 @@ public class Parametar implements IZTreeNode{
 
 	public void setGui(PredefinedParameter gui) {
 		this.gui = gui;
+	}
+
+	public String getVrednost() {
+		return vrednost;
 	}
 }
