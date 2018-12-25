@@ -4,13 +4,16 @@ import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 
 public class EditNodeAction extends ZTreeAbsAction implements Observer{
 
-	public EditNodeAction(IZTreeController controller) {
-		super(controller);
+
+	public EditNodeAction(IZTreeController controller, CommandManager manager) {
+		super(controller, manager);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

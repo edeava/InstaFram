@@ -9,6 +9,7 @@ import java.util.Observer;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
@@ -17,9 +18,12 @@ public class SaveTreeAction extends ZTreeAbsAction{
 
 	private File file;
 	
-	public SaveTreeAction(IZTreeController controller) {
-		super(controller);
+
+	public SaveTreeAction(IZTreeController controller, CommandManager manager) {
+		super(controller, manager);
+		// TODO Auto-generated constructor stub
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

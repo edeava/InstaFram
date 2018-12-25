@@ -7,6 +7,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
@@ -27,16 +28,16 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private CutNodeAction cut;
 	private ZTreeNode prevSelected;
 		
-	public ZTreeActionManager(IZTreeController controller, Clipboard clipboard) {
-		this.addNode = new AddNodeAction(controller);
-		this.removeNode = new RemoveNodeAction(controller);
-		this.editNode = new EditNodeAction(controller);
-		this.saveAction = new SaveTreeAction(controller);
-		this.loadAction = new LoadTreeAction(controller);
-		this.saveAs = new SaveAsTreeAction(controller);
-		this.copy = new CopyNodeAction(controller, clipboard);
-		this.paste = new PasteNodeAction(controller, clipboard);
-		this.cut = new CutNodeAction(controller, clipboard);
+	public ZTreeActionManager(IZTreeController controller, Clipboard clipboard, CommandManager manager) {
+		this.addNode = new AddNodeAction(controller, manager);
+		this.removeNode = new RemoveNodeAction(controller, manager);
+		this.editNode = new EditNodeAction(controller, manager);
+		this.saveAction = new SaveTreeAction(controller, manager);
+		this.loadAction = new LoadTreeAction(controller, manager);
+		this.saveAs = new SaveAsTreeAction(controller, manager);
+		this.copy = new CopyNodeAction(controller, manager, clipboard);
+		this.paste = new PasteNodeAction(controller, manager, clipboard);
+		this.cut = new CutNodeAction(controller, manager, clipboard);
 	}
 
 	@Override

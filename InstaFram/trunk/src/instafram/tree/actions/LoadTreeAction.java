@@ -9,14 +9,16 @@ import java.util.Observer;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Proizvod;
 
 public class LoadTreeAction extends ZTreeAbsAction{
 
-	public LoadTreeAction(IZTreeController controller) {
-		super(controller);
+	public LoadTreeAction(IZTreeController controller, CommandManager manager) {
+		super(controller, manager);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

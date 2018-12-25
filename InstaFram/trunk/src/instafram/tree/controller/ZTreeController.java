@@ -20,6 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import instafram.command.AddNodeCommand;
+import instafram.command.CommandManager;
+import instafram.command.RemoveNodeCommand;
 import instafram.tree.model.IZTreeNode;
 import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
@@ -33,6 +36,7 @@ public class ZTreeController implements IZTreeController{
 	private ZTree tree;
 	private ArrayList<ObserverUpdate> observers = new ArrayList<>();
 	private boolean changed = true;
+	private CommandManager manager = new CommandManager();
 	
 	@Override
 	public void setTree(ZTree tree) {
