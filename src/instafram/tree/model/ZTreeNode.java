@@ -24,7 +24,10 @@ public class ZTreeNode extends DefaultMutableTreeNode implements Observable, Ser
 		this.node = clone.node;
 		int n = clone.getChildCount();
 		for (int i = 0; i < n; i++) {
-			this.insert((MutableTreeNode) clone.getChildAt(0), i);
+			ZTreeNode child = (ZTreeNode) clone.getChildAt(0);
+			//child.setParent(this);
+			this.insert(child, i);
+			child.setParent(this);
 		}
 	}
 	

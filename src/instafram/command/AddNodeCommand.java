@@ -1,5 +1,6 @@
 package instafram.command;
 
+import instafram.tree.controller.IZTreeController;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.IZTreeNode;
 import instafram.tree.model.ZTreeNode;
@@ -9,9 +10,10 @@ public class AddNodeCommand extends AbsCommand{
 	private ZTreeNode selectedNode;
 	private ZTreeNode parent;
 	
-	public AddNodeCommand(ZTreeController controller, ZTreeNode parent, ZTreeNode selectedNode) {
+	public AddNodeCommand(IZTreeController controller, ZTreeNode parent, IZTreeNode selectedNode) {
 		super(controller);
-		this.selectedNode = selectedNode;
+		this.selectedNode = new ZTreeNode(selectedNode);
+		this.selectedNode.setParent(parent);
 		this.parent = parent;
 	}
 

@@ -8,25 +8,26 @@ import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Parametar;
 
-public class CutNodesCommand extends AbsCommand{
-
+public class PasteNodesCommand extends AbsCommand{
+	
 	private ArrayList<ZTreeNode> selectedNodes = new ArrayList<>();
 	private ZTreeNode selectedNode;
+	private ZTreeNode prevNode;
 	
-	public CutNodesCommand(IZTreeController controller, ArrayList<ZTreeNode> selectedNodes) {
+	public PasteNodesCommand(IZTreeController controller, ArrayList<ZTreeNode> selectedNodes, ZTreeNode selectedNode) {
 		super(controller);
 		this.selectedNodes = selectedNodes;
+		this.selectedNode = selectedNode;
 	}
 
 	@Override
 	public void doCommand() {
 		for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
-			ZTreeNode zTreeNode = (ZTreeNode) iterator.next();
-			if(zTreeNode.getNode() instanceof Parametar) {
-				if(zTreeNode.getParent() == null)
-					zTreeNode.setParent(selectedNode);
-				selectedNode = (ZTreeNode) zTreeNode.getParent();
-				controller.removeNode(zTreeNode, false);
+			ZTreeNode tmpNode = (ZTreeNode) iterator.next();
+			if(tmpNode.getNode() instanceof Parametar) {
+				prevNode = (ZTreeNode) tmpNode.getParent();
+				controller.addNode(selectedNode, tmpNode.getNode());
+				tmpNode.setParent(selectedNode);
 			}
 		}
 	}
@@ -34,13 +35,10 @@ public class CutNodesCommand extends AbsCommand{
 	@Override
 	public void undoCommand() {
 		for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
-			ZTreeNode tmpNode = new ZTreeNode((ZTreeNode) iterator.next());
-			if(tmpNode.getNode() instanceof Parametar) {
-				((ZTreeController) controller).addCmdNode(selectedNode, tmpNode);
-				//tmpNode.setParent(selectedNode);
+			ZTreeNode zTreeNode = (ZTreeNode) iterator.next();
+			if(zTreeNode.getNode() instanceof Parametar) {
+				controller.removeNode(zTreeNode, false);
 			}
 		}
 	}
-
-	
 }

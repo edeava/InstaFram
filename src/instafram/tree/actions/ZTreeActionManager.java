@@ -26,7 +26,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 	private CopyNodeAction copy;
 	private PasteNodeAction paste;
 	private CutNodeAction cut;
-	private ZTreeNode prevSelected;
+	private UndoAction undo;
+	private RedoAction redo;
 		
 	public ZTreeActionManager(IZTreeController controller, Clipboard clipboard, CommandManager manager) {
 		this.addNode = new AddNodeAction(controller, manager);
@@ -38,6 +39,8 @@ public class ZTreeActionManager implements TreeSelectionListener{
 		this.copy = new CopyNodeAction(controller, manager, clipboard);
 		this.paste = new PasteNodeAction(controller, manager, clipboard);
 		this.cut = new CutNodeAction(controller, manager, clipboard);
+		this.undo = new UndoAction(controller, manager);
+		this.redo = new RedoAction(controller, manager);
 	}
 
 	@Override
@@ -97,5 +100,13 @@ public class ZTreeActionManager implements TreeSelectionListener{
 
 	public CutNodeAction getCut() {
 		return cut;
+	}
+
+	public UndoAction getUndo() {
+		return undo;
+	}
+
+	public RedoAction getRedo() {
+		return redo;
 	}
 }

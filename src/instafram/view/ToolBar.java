@@ -63,8 +63,6 @@ public class ToolBar extends JToolBar{
 		btnCopy.setIcon(new ImageIcon("Img/copy.png"));
 		add(btnCopy);
 		btnCopy.addActionListener(tree.getActionManager().getCopy());
-		KeyStroke keyStroke = KeyStroke.getKeyStroke('C', Event.CTRL_MASK, false);
-	    btnCopy.registerKeyboardAction(null, keyStroke, JComponent.WHEN_FOCUSED);
 		if(korisnik.equals("konfigurator"))
 			btnCopy.setEnabled(false);
 		

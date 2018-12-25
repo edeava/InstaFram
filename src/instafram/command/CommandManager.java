@@ -19,6 +19,8 @@ public class CommandManager {
 		if(doCommands.isEmpty())
 			return;
 		AbsCommand c = doCommands.get(doCommands.size() - 1);
+		doCommands.remove(c);
+		undoCommands.add(c);
 		c.doCommand();
 	}
 	
@@ -26,6 +28,8 @@ public class CommandManager {
 		if(undoCommands.isEmpty())
 			return;
 		AbsCommand c = undoCommands.get(undoCommands.size() - 1);
+		undoCommands.remove(c);
+		doCommands.add(c);
 		c.undoCommand();
 	}
 	

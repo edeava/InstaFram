@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
+import instafram.command.AddNodeCommand;
 import instafram.command.CommandManager;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
@@ -29,20 +30,28 @@ public class AddNodeAction extends ZTreeAbsAction{
 		if(selectedNode == null)
 			selectedNode = (ZTreeNode) controller.getTree().getModel().getRoot();
 		
-		if(selectedNode.getNode() instanceof Proizvod && !selectedNode.isRoot())
-			controller.addNode(selectedNode, new Modul("Modul" + (selectedNode.getChildCount() + 1)));
-		else if(selectedNode.getNode() instanceof Modul) {
+		if(selectedNode.getNode() instanceof Proizvod && !selectedNode.isRoot()) {
+			//controller.addNode(selectedNode, new Modul("Modul" + (selectedNode.getChildCount() + 1)));
+			manager.addCommand(new AddNodeCommand(controller, selectedNode, new Modul("Modul" + (selectedNode.getChildCount() + 1))));
+			manager.doCommand();
+		}else if(selectedNode.getNode() instanceof Modul) {
 			ParametarEditDialog pD = new ParametarEditDialog();
 			pD.setModal(true);
 			pD.setVisible(true);
 			Parametar p = pD.createParametar("Parametar" + (selectedNode.getChildCount() + 1));
-			if(p != null)
-				controller.addNode(selectedNode, p);
+			if(p != null) {
+				//controller.addNode(selectedNode, p);
+				manager.addCommand(new AddNodeCommand(controller, selectedNode, p));
+				manager.doCommand();
+			}
 		}
 		else if(selectedNode.getNode() instanceof Parametar) {
 			//nista
 		}
-		else
-			controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
+		else {
+			//controller.addNode(selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++));
+			manager.addCommand(new AddNodeCommand(controller, selectedNode, new Proizvod("Proizvod" + AddNodeAction.i++)));
+			manager.doCommand();
+		}
 	}
 }

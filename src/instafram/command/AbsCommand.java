@@ -1,22 +1,23 @@
 package instafram.command;
 
+import instafram.tree.controller.IZTreeController;
 import instafram.tree.controller.ZTreeController;
 
 public abstract class AbsCommand {
 	
-	protected ZTreeController controller;
+	protected IZTreeController controller;
 	
-	public AbsCommand(ZTreeController controller) {
+	public AbsCommand(IZTreeController controller) {
 		super();
 		this.controller = controller;
 	}
 	
-	public ZTreeController getController() {
+	public IZTreeController getController() {
 		return controller;
 	}
 
 
-	public void setController(ZTreeController controller) {
+	public void setController(IZTreeController controller) {
 		this.controller = controller;
 	}
 

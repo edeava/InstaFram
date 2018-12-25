@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.util.Iterator;
 
 import instafram.command.CommandManager;
+import instafram.command.CutNodesCommand;
 import instafram.tree.controller.IZTreeController;
 import instafram.tree.model.ZTreeNode;
 import instafram.treeComponent.model.Parametar;
@@ -20,11 +21,13 @@ public class CutNodeAction extends CopyNodeAction {
 	public void actionPerformed(ActionEvent arg0) {
 		super.actionPerformed(arg0);
 		
-		for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
+		manager.addCommand(new CutNodesCommand(controller, selectedNodes));
+		manager.doCommand();
+		/*for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
 			ZTreeNode zTreeNode = (ZTreeNode) iterator.next();
 			if(zTreeNode.getNode() instanceof Parametar)
 				controller.removeNode(zTreeNode, false);
-		}
+		}*/
 	}
 
 }
