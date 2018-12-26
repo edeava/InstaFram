@@ -92,7 +92,7 @@ public class GuiBuilder {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					parametar.setVrednost(parametar.getVrednost() + "|1");
+					parametar.setVrednost(parametar.getVrednost() + "|0");
 				}
 			});
 			
@@ -100,7 +100,7 @@ public class GuiBuilder {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					parametar.setVrednost(parametar.getVrednost() + "|2");
+					parametar.setVrednost(parametar.getVrednost() + "|1");
 				}
 			});
 			
@@ -108,7 +108,7 @@ public class GuiBuilder {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					parametar.setVrednost(parametar.getVrednost() + "|3");
+					parametar.setVrednost(parametar.getVrednost() + "|2");
 				}
 			});
 		}
