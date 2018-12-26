@@ -1,4 +1,4 @@
-package instafram.install;
+package instafram.install.model;
 
 import java.io.File;
 import java.io.Serializable;

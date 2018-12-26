@@ -3,10 +3,12 @@ package instafram.view;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import instafram.actions.InstallAction;
 import instafram.tree.controller.ZTreeController;
 import instafram.tree.model.ObserverUpdate;
 import instafram.tree.model.ZTreeNode;
@@ -29,6 +31,9 @@ public class PanelDDole extends JPanel implements ObserverUpdate{
 		add(lbBrDece);
 		add(lbBrListova);
 		add(lbGui);
+		JButton btnInstall = new JButton("Install");
+		btnInstall.addActionListener(new InstallAction());
+		add(btnInstall);
 	}
 
 
