@@ -34,7 +34,7 @@ public class CommandManager {
 	}
 	
 	public void clear() {
-		doCommands.clear();
-		undoCommands.clear();
+		doCommands.removeAll(doCommands);
+		undoCommands.removeAll(undoCommands);
 	}
 }

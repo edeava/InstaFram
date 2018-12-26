@@ -61,7 +61,11 @@ public class ZTreeController implements IZTreeController{
 			if(!node.getObservers().contains(o))
 				node.addObserver(o);
 		
-		tree.getModel().insertNodeInto(node, parent, parent.getChildCount());
+		try{
+			tree.getModel().insertNodeInto(node, parent, parent.getChildCount());
+		}catch(IllegalArgumentException e){
+			
+		}
 		changed = true;
 	}
 
@@ -159,7 +163,19 @@ public class ZTreeController implements IZTreeController{
 			fileIn.close();
 		}
 	}
+	
+	@Override
+	public void pasteNodes(ZTreeNode parent, ArrayList<ZTreeNode> nodes) {
+		for(ZTreeNode node : nodes)
+			addNode(parent, node.getNode());
+	}
 
+	@Override
+	public void cutNodes(ArrayList<ZTreeNode> nodes) {
+		for(ZTreeNode node : nodes)
+			removeNode(node, false);
+	}
+	
 	@Override
 	public ZTree getTree() {
 		return tree;

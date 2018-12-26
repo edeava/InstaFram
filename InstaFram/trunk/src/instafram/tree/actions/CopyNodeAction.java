@@ -26,7 +26,7 @@ public class CopyNodeAction extends ZTreeAbsAction{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		selectedNodes.clear();
+		selectedNodes.removeAll(selectedNodes);
 		TreePath[] paths = controller.getTree().getSelectionPaths();
 		int n = paths.length;
 		for (TreePath p : paths) {

@@ -3,6 +3,7 @@ package instafram.tree.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import instafram.tree.model.IZTreeNode;
 import instafram.tree.model.ObserverUpdate;
@@ -17,6 +18,8 @@ public interface IZTreeController {
 	public void removeNode(ZTreeNode node, boolean msg);
 	public void saveTree(ZTreeNode root, File file) throws IOException;
 	public void loadTree(ZTreeNode root, File file) throws IOException, FileNotFoundException, ClassNotFoundException;
+	public void pasteNodes(ZTreeNode parent, ArrayList<ZTreeNode> nodes);
+	public void cutNodes(ArrayList<ZTreeNode> nodes);
 	public void addObservers(ObserverUpdate o);
 }
 	

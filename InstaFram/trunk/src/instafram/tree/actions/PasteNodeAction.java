@@ -40,16 +40,10 @@ public class PasteNodeAction extends ZTreeAbsAction{
 				throw new ClassNotFoundException();
 			
 			tmpElements = (ArrayList<ZTreeNode>) selected.getTransferData(TreeElementSelection.flavor);
-			int n = tmpElements.size();
 			
 			manager.addCommand(new PasteNodesCommand(controller, tmpElements, selectedNode));
 			manager.doCommand();
-			/*for (int i = 0; i < n; i++) {
-				if(tmpElements.get(i).getNode() instanceof Parametar) {
-					ZTreeNode tmpNode = new ZTreeNode(tmpElements.get(i));
-					controller.addNode(selectedNode, tmpNode.getNode());
-				}
-			}*/
+			
 		} catch (UnsupportedFlavorException | IOException e) {
 			
 		} catch (ClassNotFoundException e) {
