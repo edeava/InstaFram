@@ -36,6 +36,7 @@ public class SaveAsTreeAction extends ZTreeAbsAction{
 				
 				try {
 					controller.saveTree(selectedNode, file);
+					manager.clear();
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "Fajl ne postoji!");
 				}

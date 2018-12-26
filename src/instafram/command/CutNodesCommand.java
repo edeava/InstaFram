@@ -20,26 +20,13 @@ public class CutNodesCommand extends AbsCommand{
 
 	@Override
 	public void doCommand() {
-		for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
-			ZTreeNode zTreeNode = new ZTreeNode((ZTreeNode) iterator.next());
-			if(zTreeNode.getNode() instanceof Parametar) {
-				if(zTreeNode.getParent() == null)
-					zTreeNode.setParent(selectedNode);
-				selectedNode = (ZTreeNode) zTreeNode.getParent();
-				controller.removeNode(zTreeNode, false);
-			}
-		}
+		selectedNode = (ZTreeNode) selectedNodes.get(0).getParent();
+		controller.cutNodes(selectedNodes);
 	}
 
 	@Override
 	public void undoCommand() {
-		for (Iterator iterator = selectedNodes.iterator(); iterator.hasNext();) {
-			ZTreeNode tmpNode = new ZTreeNode((ZTreeNode) iterator.next());
-			if(tmpNode.getNode() instanceof Parametar) {
-				((ZTreeController) controller).addCmdNode(selectedNode, tmpNode);
-				//tmpNode.setParent(selectedNode);
-			}
-		}
+		controller.pasteNodes(selectedNode, selectedNodes);
 	}
 
 	

@@ -38,6 +38,7 @@ public class LoadTreeAction extends ZTreeAbsAction{
 					selectedNode = (ZTreeNode) selectedNode.getParent();
 				
 				controller.loadTree(selectedNode, file);
+				manager.clear();
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Fajl ne postoji!");
 			} catch (ClassNotFoundException e) {
