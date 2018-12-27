@@ -57,12 +57,10 @@ public class ZTreeController implements IZTreeController{
 	}
 	
 	public void addCmdNode(ZTreeNode parent, ZTreeNode node) {
-		for(ObserverUpdate o : observers)
-			if(!node.getObservers().contains(o))
-				node.addObserver(o);
+		addNode(parent, node.getNode());
 		
 		try{
-			tree.getModel().insertNodeInto(node, parent, parent.getChildCount());
+			tree.getModel().insertNodeInto(node, parent, parent.getChildCount() + 1);
 		}catch(IllegalArgumentException e){
 			
 		}

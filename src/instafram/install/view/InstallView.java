@@ -14,6 +14,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -99,11 +100,29 @@ public class InstallView extends JDialog{
 			}
 		});
 		
+		cancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		
+		setLocationRelativeTo(null);
 		setModal(true);
 		setVisible(true);
 	}
 	
 	public void end() throws IOException {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		File file = null;
+		int approved = chooser.showOpenDialog(null);
+		System.out.println(approved == JFileChooser.APPROVE_OPTION);
+		if(approved == JFileChooser.APPROVE_OPTION) {
+			file = chooser.getSelectedFile();
+			Files.copy(new File(pack.getSource()).toPath(), new File(file.getPath() + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
+		}
 		if(shortcut) {
 			Files.copy(new File(pack.getSource()).toPath(), new File(System.getProperty("user.home") + "/Desktop" + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
 		}

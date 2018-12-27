@@ -42,7 +42,7 @@ public class Application extends JFrame implements ClipboardOwner{
 	private PanelD workspace;
 	private JScrollPane treeSc;
 	private Clipboard clipboard;
-	private String korisnik = "student";
+	private String korisnik = "admin";
 	
 	public ZTree getTree() {
 		return tree;

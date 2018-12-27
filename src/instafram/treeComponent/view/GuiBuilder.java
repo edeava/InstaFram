@@ -114,10 +114,12 @@ public class GuiBuilder {
 		}
 		else if(gui == PredefinedParameter.DESKTOP_SHORTCUT) {
 			JCheckBox cb = new JCheckBox("Da li zelite desktop precicu?");
+			GuiBuilder.parametar.setVrednost(GuiBuilder.parametar.getVrednost() + "|false");
 			cb.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					GuiBuilder.parametar.setVrednost(GuiBuilder.parametar.getVrednost() + "|false");
 					GuiBuilder.parametar.setVrednost(GuiBuilder.parametar.getVrednost() + "|true");
 				}
 			});
@@ -125,10 +127,12 @@ public class GuiBuilder {
 		}
 		else if(gui == PredefinedParameter.RUN_AFTER_FINISH) {
 			JCheckBox cb = new JCheckBox("Da li zelite da pokrenete aplikaciju nakon zavrsetka instalacije?");
+			GuiBuilder.parametar.setVrednost(GuiBuilder.parametar.getVrednost() + "|false");
 			cb.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					GuiBuilder.parametar.setVrednost(GuiBuilder.parametar.getVrednost() + "|false");
 					GuiBuilder.parametar.setVrednost(GuiBuilder.parametar.getVrednost() + "|true");
 				}
 			});
@@ -137,7 +141,7 @@ public class GuiBuilder {
 		else {
 			Box b1 = Box.createHorizontalBox();
 			
-			JLabel lb = new JLabel(parametar.getVrednost().substring(0, parametar.getVrednost().indexOf("$")));
+			JLabel lb = new JLabel(parametar.getVrednost());
 			b1.add(lb);
 			box.add(b1);
 			
@@ -151,8 +155,8 @@ public class GuiBuilder {
 			}
 			else if(gui == PredefinedParameter.DROP_DOWN) {
 				JComboBox<String> cb = new JComboBox<>();
-				if(parametar.getVrednost() != null && parametar.getVrednost().contains("$")) {
-					String[] parse = parametar.getVrednost().split("$");
+				if(parametar.getVrednost() != null && parametar.getVrednost().contains("|")) {
+					String[] parse = parametar.getVrednost().split("|");
 					for (int i = 1; i < parse.length; i++) {
 						cb.addItem(parse[i]);
 					}
@@ -171,7 +175,7 @@ public class GuiBuilder {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						cb.addItem(tfC.getText());
-						parametar.setVrednost(parametar.getVrednost() + "$" + tfC.getText());
+						parametar.setVrednost(parametar.getVrednost() + "|" + tfC.getText());
 					}
 				});
 			}
