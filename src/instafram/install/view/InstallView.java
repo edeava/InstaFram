@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -121,12 +122,12 @@ public class InstallView extends JDialog{
 		System.out.println(approved == JFileChooser.APPROVE_OPTION);
 		if(approved == JFileChooser.APPROVE_OPTION) {
 			file = chooser.getSelectedFile();
-			Files.copy(new File(pack.getSource()).toPath(), new File(file.getPath() + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
+			Files.copy(new File(pack.getSource()).toPath(), new File(file.getPath() + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath(), StandardCopyOption.REPLACE_EXISTING);
 		}
 		if(run)
 			Desktop.getDesktop().open(new File(pack.getSource()));
 		if(shortcut) {
-			Files.copy(new File(pack.getSource()).toPath(), new File(System.getProperty("user.home") + "/Desktop" + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
+			Files.copy(new File(pack.getSource()).toPath(), new File(System.getProperty("user.home") + "/Desktop" + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath(), StandardCopyOption.REPLACE_EXISTING);
 		}
 		
 	}
