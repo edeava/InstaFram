@@ -52,9 +52,9 @@ public class LogInFrame extends JDialog{
 				dispose();
 				}
 				
-				else if(tfUsername.getText().equals("konfigurator") &&
+				else if(tfUsername.getText().equals("student") &&
 						tfPassword.getText().equals(userPass)) {
-					korisnik = "konfigurator";
+					korisnik = "student";
 					setVisible(false);
 					dispose();
 				}

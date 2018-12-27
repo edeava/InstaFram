@@ -123,10 +123,11 @@ public class InstallView extends JDialog{
 			file = chooser.getSelectedFile();
 			Files.copy(new File(pack.getSource()).toPath(), new File(file.getPath() + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
 		}
+		if(run)
+			Desktop.getDesktop().open(new File(pack.getSource()));
 		if(shortcut) {
 			Files.copy(new File(pack.getSource()).toPath(), new File(System.getProperty("user.home") + "/Desktop" + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
 		}
-		if(run)
-			Desktop.getDesktop().open(new File(pack.getSource()));
+		
 	}
 }
