@@ -1,7 +1,14 @@
 package instafram.install.view;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -13,14 +20,22 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import instafram.install.model.InstallPackage;
 import instafram.treeComponent.model.Parametar;
+import instafram.treeComponent.model.PredefinedParameter;
 import instafram.treeComponent.view.GuiBuilder;
 
 public class InstallView extends JDialog{
 
-	InstallPackage pack;
+	private InstallPackage pack;
+	private int cursor = 0;
+	private boolean shortcut = false;
+	private boolean run = false;
 	
 	public InstallView(InstallPackage pack1) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		this.pack = pack1;
+		
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension scrSize = kit.getScreenSize();
+		setSize(scrSize.width / 2, scrSize.height / 2);
 		
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		JPanel sidePanel = new JPanel();
@@ -44,16 +59,55 @@ public class InstallView extends JDialog{
 		setIconImage(new ImageIcon(pack.getLogo()).getImage());
 		
 		add(mainPanel);
-		
-		for(Parametar p : pack.getParametri()) {
-			sidePanel.removeAll();
-			sidePanel.add(GuiBuilder.build(p.getGui(), p));
-			this.pack();
-		}
+		next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				
+				if(GuiBuilder.parametar != null) {
+					if(GuiBuilder.parametar.getGui() == PredefinedParameter.DESKTOP_SHORTCUT) {
+						int indeks = GuiBuilder.parametar.getVrednost().lastIndexOf("|");
+						shortcut = Boolean.parseBoolean(GuiBuilder.parametar.getVrednost().substring(indeks + 1, GuiBuilder.parametar.getVrednost().length()));
+					}
+					if(GuiBuilder.parametar.getGui() == PredefinedParameter.RUN_AFTER_FINISH) {
+						int indeks = GuiBuilder.parametar.getVrednost().lastIndexOf("|");
+						String string = GuiBuilder.parametar.getVrednost().substring(indeks + 1, GuiBuilder.parametar.getVrednost().length());
+						boolean trt = Boolean.parseBoolean(string);
+						run = trt;
+					}
+				}
+				
+				if(cursor > pack.getParametri().size() - 1) {
+					try {
+						end();
+					} catch (IOException e1) {
+						
+					}
+					setVisible(false);
+					dispose();
+					cursor--;
+				}
+				
+				Parametar p = pack.getParametri().get(cursor);
+				sidePanel.removeAll();
+				sidePanel.add(GuiBuilder.build(p.getGui(), p));
+				
+				cursor++;
+				
+				sidePanel.updateUI();
+				//revalidate();
+			}
+		});
 		
 		setModal(true);
 		setVisible(true);
 	}
 	
-	
+	public void end() throws IOException {
+		if(shortcut) {
+			Files.copy(new File(pack.getSource()).toPath(), new File(System.getProperty("user.home") + "/Desktop" + pack.getSource().substring(pack.getSource().lastIndexOf("\\"), pack.getSource().length())).toPath());
+		}
+		if(run)
+			Desktop.getDesktop().open(new File(pack.getSource()));
+	}
 }
