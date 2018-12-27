@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -83,7 +84,7 @@ public class InstallView extends JDialog{
 					try {
 						end();
 					} catch (IOException e1) {
-						
+						JOptionPane.showMessageDialog(null, "Vec ste instalirali ovaj program");
 					}
 					setVisible(false);
 					dispose();
