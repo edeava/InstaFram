@@ -16,17 +16,23 @@ public class PasteNodesCommand extends AbsCommand{
 	
 	public PasteNodesCommand(IZTreeController controller, ArrayList<ZTreeNode> selectedNodes, ZTreeNode selectedNode) {
 		super(controller);
-		this.selectedNodes = selectedNodes;
+		for(ZTreeNode node : selectedNodes)
+			this.selectedNodes.add(node);
 		this.selectedNode = selectedNode;
 	}
 
 	@Override
 	public void doCommand() {
+		prevNode = (ZTreeNode) selectedNodes.get(0).getParent();
 		controller.pasteNodes(selectedNode, selectedNodes);
+		for(ZTreeNode node : selectedNodes)
+			node.setParent(selectedNode);
 	}
 
 	@Override
 	public void undoCommand() {
 		controller.cutNodes(selectedNodes);
+		for(ZTreeNode node : selectedNodes)
+			node.setParent(prevNode);
 	}
 }

@@ -22,6 +22,7 @@ public class CutNodesCommand extends AbsCommand{
 	public void doCommand() {
 		selectedNode = (ZTreeNode) selectedNodes.get(0).getParent();
 		controller.cutNodes(selectedNodes);
+		
 	}
 
 	@Override

@@ -20,6 +20,8 @@ public class CutNodeAction extends CopyNodeAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		super.actionPerformed(arg0);
+		if(selectedNodes.isEmpty())
+			return;
 		
 		manager.addCommand(new CutNodesCommand(controller, selectedNodes));
 		manager.doCommand();
